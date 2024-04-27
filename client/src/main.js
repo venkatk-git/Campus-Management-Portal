@@ -107,7 +107,7 @@ import VirtualScroller from "primevue/virtualscroller";
 import ThemeSwitcher from "./components/ThemeSwitcher.vue";
 import Configurator from "./components/Configurator.vue";
 import Lara from "./presets/lara";
-import appState from "./plugins/appState";
+import appState from "./presets/lara/accordion/plugins/appState";
 
 app.use(PrimeVue, { ripple: true, unstyled: true, pt: Lara });
 app.use(ConfirmationService);
