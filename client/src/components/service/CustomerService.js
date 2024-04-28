@@ -9021,6 +9021,7 @@ const CustomerService = {
   },
 
   getCustomers(params) {
+    console.log(params);
     const queryParams = params
       ? Object.keys(params)
           .map(

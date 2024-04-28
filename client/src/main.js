@@ -3,7 +3,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 const app = createApp(App);
-import router from "./router/index";
+import router from "@/router";
 import PrimeVue from "primevue/config";
 import AutoComplete from "primevue/autocomplete";
 import Accordion from "primevue/accordion";
