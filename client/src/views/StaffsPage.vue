@@ -1,9 +1,12 @@
 <template>
-  <h3>Staffs</h3>
+  <div class="flex flex-col gap-10 mt-10 w-11/12">
+    <h3 class="text-xl">Staffs</h3>
+    <Staffs />
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import Staffs from "@/components/Staffs.vue";
 </script>
 
 <style></style>

@@ -5,22 +5,20 @@
     <div class="card w-11/12">
       <DataTable
         v-model:filters="filters"
-        :value="tasks"
+        :value="staffs"
         paginator
         :rows="5"
         dataKey="id"
         filterDisplay="row"
         :loading="loading"
         :globalFilterFields="[
-          'name',
           'id',
-          'date',
+          'name',
+          'age',
+          'gender',
           'category',
           'location',
-          'eta',
-          'staffs',
-          'status',
-          'remarks',
+          'level',
         ]"
       >
         <template #header>
@@ -34,7 +32,7 @@
                 </InputIcon>
                 <InputText
                   v-model="filters['global'].value"
-                  placeholder="Search Task"
+                  placeholder="Search Staff"
                   class="pl-10 font-normal bg-transparent border-[#ffffff4e]"
                 />
               </IconField>
@@ -43,7 +41,7 @@
         </template>
         <template #empty> No customers found. </template>
         <template #loading> Loading customers data. Please wait. </template>
-        <Column filterField="id" header="Task ID" style="min-width: 12rem">
+        <Column filterField="id" header="Staff ID" style="min-width: 12rem">
           <template #body="{ data }">
             {{ data.id }}
           </template>
@@ -53,39 +51,13 @@
               type="text"
               @input="filterCallback()"
               class="p-column-filter"
-              placeholder="Search by task id"
+              placeholder="Search by staff id"
             />
-          </template>
-        </Column>
-        <Column filterField="date" header="Date" style="min-width: 12rem">
-          <template #body="{ data }">
-            {{ data.date }}
-          </template>
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by date"
-            />
-            <!-- <Calendar
-              v-model="filterModel.value"
-              @change="filterCallback()"
-              class="p-column-filter"
-              dateFormat="dd/mm/yy"
-            /> -->
           </template>
         </Column>
         <Column header="Name" filterField="name" style="min-width: 12rem">
           <template #body="{ data }">
             <div class="flex items-center gap-2">
-              <!-- <img
-                alt="flag"
-                src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                :class="`flag flag-${data.country.code}`"
-                style="width: 24px"
-              /> -->
               <span>{{ data.name }}</span>
             </div>
           </template>
@@ -97,6 +69,42 @@
               class="p-column-filter"
               placeholder="Search by name"
             />
+          </template>
+        </Column>
+        <Column filterField="age" header="Age" style="min-width: 12rem">
+          <template #body="{ data }">
+            {{ data.age }}
+          </template>
+          <template #filter="{ filterModel, filterCallback }">
+            <InputText
+              v-model="filterModel.value"
+              type="text"
+              @input="filterCallback()"
+              class="p-column-filter"
+              placeholder="Search by age"
+            />
+          </template>
+        </Column>
+        <Column filterField="gender" header="Gender" style="min-width: 12rem">
+          <template #body="{ data }">
+            {{ data.gender }}
+          </template>
+          <template #filter="{ filterModel, filterCallback }">
+            <Dropdown
+              v-model="filterModel.value"
+              @change="filterCallback()"
+              :options="genders"
+              placeholder="Select Gender"
+              class="p-column-filter"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
           </template>
         </Column>
         <Column
@@ -128,112 +136,43 @@
           </template>
         </Column>
         <Column
-          header="Location"
           filterField="location"
-          :showFilterMenu="false"
-          :filterMenuStyle="{ width: '14rem' }"
-          style="min-width: 14rem"
+          header="Location"
+          style="min-width: 12rem"
         >
           <template #body="{ data }">
-            <span>{{ data.location }}</span>
+            {{ data.location }}
+          </template>
+          <template #filter="{ filterModel, filterCallback }">
+            <InputText
+              v-model="filterModel.value"
+              type="text"
+              @input="filterCallback()"
+              class="p-column-filter"
+              placeholder="Search by location"
+            />
+          </template>
+        </Column>
+        <Column filterField="level" header="Level" style="min-width: 12rem">
+          <template #body="{ data }">
+            {{ data.level }}
           </template>
           <template #filter="{ filterModel, filterCallback }">
             <Dropdown
               v-model="filterModel.value"
               @change="filterCallback()"
-              :options="locations"
-              placeholder="Select Block"
+              :options="levels"
+              placeholder="Select Level"
               class="p-column-filter"
               style="min-width: 12rem"
               :showClear="true"
             >
               <template #option="slotProps">
-                <span>{{ slotProps.option }}</span>
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
               </template>
             </Dropdown>
-          </template>
-        </Column>
-        <Column
-          header="Number of Staffs"
-          filterField="staffs"
-          style="min-width: 4rem"
-        >
-          <template #body="{ data }">
-            <span>{{ data.staffs }}</span>
-          </template>
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by no. of staffs"
-            />
-          </template>
-        </Column>
-        <Column header="ETA" filterField="eta" style="min-width: 4rem">
-          <template #body="{ data }">
-            <span>{{ data.eta }}</span>
-          </template>
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by ETA"
-            />
-          </template>
-        </Column>
-        <Column
-          field="status"
-          header="Status"
-          :showFilterMenu="false"
-          :filterMenuStyle="{ width: '14rem' }"
-          style="min-width: 12rem"
-        >
-          <template #body="{ data }">
-            <Tag :value="data.status" :severity="getSeverity(data.status)" />
-          </template>
-          <template #filter="{ filterModel, filterCallback }">
-            <Dropdown
-              v-model="filterModel.value"
-              @change="filterCallback()"
-              :options="statuses"
-              placeholder="Select Status"
-              class="p-column-filter"
-              style="min-width: 6rem"
-              :showClear="true"
-            >
-              <template #option="slotProps">
-                <Tag
-                  :value="slotProps.option"
-                  :severity="getSeverity(slotProps.option)"
-                />
-              </template>
-            </Dropdown>
-          </template>
-        </Column>
-        <Column header="Remarks" filterField="remarks" style="min-width: 12rem">
-          <template #body="{ data }">
-            <span>{{ data.remarks }}</span>
-            <!-- <div class="flex items-center gap-2">
-              <InputText
-                v-if="userType == 'supervisor'"
-                v-model="data.remarks"
-                :placeholder="value"
-                class="pl-10 font-normal bg-transparent border-[#ffffff4e]"
-              />
-            </div> -->
-          </template>
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by remark"
-            />
           </template>
         </Column>
       </DataTable>
@@ -250,57 +189,56 @@ import MultiSelect from "primevue/multiselect";
 import Tag from "primevue/tag";
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";
-import CustomerService from "./service/CustomerService";
-import data from "@/components/service/SampleData";
+import data from "@/components/service/SampleStaffs.js";
 const tasks = ref();
 const customers = ref();
+const staffs = ref();
 const date = ref();
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
   id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  date: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  age: { value: null, matchMode: FilterMatchMode.EQUALS },
   category: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  location: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  staffs: { value: null, matchMode: FilterMatchMode.EQUALS },
-  eta: { value: null, matchMode: FilterMatchMode.EQUALS },
-  status: { value: null, matchMode: FilterMatchMode.EQUALS },
-  remarks: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  location: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  gender: { value: null, matchMode: FilterMatchMode.EQUALS },
+  level: { value: null, matchMode: FilterMatchMode.EQUALS },
 });
+const genders = ref(["Male", "Female"]);
 const category = ref(["Category A", "Category B", "Category C"]);
 const statuses = ref(["Completed", "Pending", "Ongoing"]);
 const locations = ref(["Block A", "Block B", "Block C"]);
+const levels = ref(["I", "II", "III"]);
 const loading = ref(true);
-// const userType = ref(localstorage.getItem("user"));
 
 onMounted(() => {
-  CustomerService.getCustomersMedium().then((data) => {
-    customers.value = data;
-    loading.value = false;
-  });
   data.getTasks().then((data) => {
-    console.log(data);
-    tasks.value = data;
+    staffs.value = data;
     loading.value = false;
   });
+  //   data.getTasks().then((data) => {
+  //     console.log(data);
+  //     tasks.value = data;
+  //     loading.value = false;
+  //   });
 });
 
-const getCustomers = (data) => {
-  return [...(data || [])].map((d) => {
-    d.date = new Date(d.date);
-    return d;
-  });
-};
-const formatDate = (value) => {
-  return value.toLocaleDateString("en-US", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-};
-const formatCurrency = (value) => {
-  return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-};
+// const getCustomers = (data) => {
+//   return [...(data || [])].map((d) => {
+//     d.date = new Date(d.date);
+//     return d;
+//   });
+// };
+// const formatDate = (value) => {
+//   return value.toLocaleDateString("en-US", {
+//     day: "2-digit",
+//     month: "2-digit",
+//     year: "numeric",
+//   });
+// };
+// const formatCurrency = (value) => {
+//   return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
+// };
 const getSeverity = (status) => {
   switch (status) {
     case "Completed":

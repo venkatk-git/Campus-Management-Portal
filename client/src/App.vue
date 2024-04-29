@@ -3,7 +3,7 @@
     <SideBar
       v-if="route.path != '/' && route.path != '/login' && route.path != '/404'"
     />
-    <div class="flex flex-auto justify-center items-center w-full``">
+    <div class="flex flex-auto justify-center items-center w-11/12">
       <router-view />
     </div>
   </div>

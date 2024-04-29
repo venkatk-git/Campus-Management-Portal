@@ -24,7 +24,8 @@ function validateAuth(params) {
   let password = document.getElementById("password").value;
   if (mail == "user@gmail.com" && password == "123") {
     localStorage.setItem("auth", true);
-    router.push("/dashboard");
+    localStorage.setItem("user", "supervisor");
+    router.push("/dashboard/analytics");
   }
 }
 </script>
