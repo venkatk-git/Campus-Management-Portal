@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col gap-10 items-center w-full self-start">
       <div class="card flex flex-col gap-10">
-        <h3>Analytics</h3>
+        <h3 class="text-xl">Analytics</h3>
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           <CategoryTaskCard completed="31" tasks="31" category="Category A" />
           <CategoryTaskCard completed="28" tasks="42" category="Category B" />

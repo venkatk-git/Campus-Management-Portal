@@ -1,9 +1,16 @@
 <template>
-  <h3>Create Staff</h3>
+  <div class="flex flex-col gap-7 w-full self-start">
+    <div class="flex justify-between">
+      <h3 class="text-xl">Create Staff</h3>
+    </div>
+    <div>
+      <CreateStaffForm />
+    </div>
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import CreateStaffForm from "../components/CreateStaffForm.vue";
 </script>
 
 <style></style>

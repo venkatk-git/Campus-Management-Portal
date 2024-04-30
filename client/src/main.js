@@ -72,7 +72,6 @@ import ProgressBar from "primevue/progressbar";
 import ProgressSpinner from "primevue/progressspinner";
 import Rating from "primevue/rating";
 import RadioButton from "primevue/radiobutton";
-import Ripple from "primevue/ripple";
 import Row from "primevue/row";
 import SelectButton from "primevue/selectbutton";
 import ScrollPanel from "primevue/scrollpanel";
@@ -108,6 +107,7 @@ import ThemeSwitcher from "./components/ThemeSwitcher.vue";
 import Configurator from "./components/Configurator.vue";
 import Lara from "./presets/lara";
 import appState from "./presets/lara/accordion/plugins/appState";
+import Ripple from "primevue/ripple";
 
 app.use(PrimeVue, { ripple: true, unstyled: true, pt: Lara });
 app.use(ConfirmationService);

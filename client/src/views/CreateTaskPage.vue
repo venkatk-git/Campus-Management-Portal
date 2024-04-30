@@ -1,5 +1,10 @@
 <template>
-  <h3>Create Task</h3>
+  <div>
+    <div class="flex w-full items-center justify-between">
+      <h3 class="text-xl">Create Task</h3>
+
+    </div>
+  </div>
 </template>
 
 <script>

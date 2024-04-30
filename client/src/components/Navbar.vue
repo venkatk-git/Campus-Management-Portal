@@ -1,6 +1,8 @@
 <template>
-  <div class="nav-bar flex py-8 px-12 justify-between w-full">
-    <div class="self-start">
+  <div
+    class="nav-bar flex pt-4 pb-6 px-[3.5rem] justify-between items-center w-full"
+  >
+    <div class="self-start p-0 mt-4">
       <span class="material-symbols-outlined"> menu </span>
     </div>
     <div class="flex gap-1">
