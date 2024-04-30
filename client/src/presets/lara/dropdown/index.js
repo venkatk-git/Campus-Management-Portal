@@ -85,7 +85,7 @@ export default {
   trigger: {
     class: [
       // Flexbox
-      "flex items-center justify-center",
+      "flex items-center justify-center ",
       "shrink-0",
 
       // Color and Background
@@ -103,7 +103,7 @@ export default {
   panel: {
     class: [
       // Position
-      "absolute top-0 left-0 bg-[#1e293b] border-[#f1f5f91f]  ",
+      "absolute top-0 left-0 bg-[#1e293b] border-[#f1f5f91f]  shadow-[0 35px 60px -15px rgba(0, 0, 0, 0.3)] ",
 
       // Shape
       "border-0 dark:border",

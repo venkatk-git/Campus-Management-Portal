@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-10 mt-10 w-11/12">
+  <div class="flex flex-col gap-10 w-full">
     <h3 class="text-xl">Staffs</h3>
     <Staffs />
   </div>

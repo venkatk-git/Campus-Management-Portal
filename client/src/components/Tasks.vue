@@ -1,8 +1,8 @@
 <template>
   <div
-    class="table-card flex justify-center items-center mb-10 py-5 rounded-xl shadow bg-[rgba(30,41,59,1)] max-w-screen-xl"
+    class="table-card flex mb-10 py-5 rounded-xl shadow bg-[rgba(30,41,59,1)] max-w-screen-xl"
   >
-    <div class="card w-11/12">
+    <div class="card w-full py-4 px-10">
       <DataTable
         v-model:filters="filters"
         :value="tasks"
@@ -26,18 +26,18 @@
         <template #header>
           <div class="flex justify-end border-none">
             <span class="relative">
-              <IconField iconPosition="left">
-                <InputIcon>
-                  <i
-                    class="pi pi-search absolute top-2/4 -mt-2 left-3 text-surface-400 dark:text-surface-600"
-                  />
-                </InputIcon>
+              <div class="input-field">
+                <span
+                  class="material-symbols-outlined absolute top-2/4 -mt-3 left-3 text-surface-400 dark:text-surface-600 opacity-70"
+                >
+                  search
+                </span>
                 <InputText
                   v-model="filters['global'].value"
                   placeholder="Search Task"
-                  class="pl-10 font-normal bg-transparent border-[#ffffff4e]"
+                  class="pl-[3rem] font-normal bg-transparent border-[#ffffff4e]"
                 />
-              </IconField>
+              </div>
             </span>
           </div>
         </template>
