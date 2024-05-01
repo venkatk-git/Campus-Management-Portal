@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <div class="flex w-full items-center justify-between">
-      <h3 class="text-xl">Create Task</h3>
-
+  <div class="flex flex-col gap-7 w-full self-start">
+    <h3 class="text-xl">Create Task</h3>
+    <div>
+      <CreateTaskForm />
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import CreateTaskForm from "../components/CreateTaskForm.vue";
 </script>
 
 <style></style>

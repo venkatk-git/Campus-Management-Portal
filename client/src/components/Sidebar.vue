@@ -1,7 +1,7 @@
 <template>
   <aside
-    :class="`${isOpen && 'open'} ${!isOpen && 'items-center'}`"
     class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4"
+    id="aside"
   >
     <div
       class="flex"
@@ -11,13 +11,6 @@
         <div class="flex justify-center transition duration-200 ease-in-out">
           <Logo size="32px" />
         </div>
-      </div>
-      <div class="menu-toggle-wrapper flex justify-center">
-        <button class="menu-toggle" @click="ToggleMenu">
-          <span class="material-symbols-outlined">
-            keyboard_double_arrow_right
-          </span>
-        </button>
       </div>
     </div>
     <div class="flex flex-col justify-between h-full">
@@ -61,21 +54,21 @@
 <script setup>
 import { ref } from "vue";
 import Logo from "./Logo.vue";
-const isOpen = ref(localStorage.getItem("isOpen") === "true");
-function ToggleMenu() {
-  isOpen.value = !isOpen.value;
-  localStorage.setItem("isOpen", isOpen.value);
-}
+
+const isOpen = ref(localStorage.getItem("isOpen"));
 </script>
 
 <style scoped>
 aside {
-  width: 4.5rem;
+  visibility: hidden;
+  margin-left: -95px;
   transition: 0.2s ease-in-out;
   border-right: 0.8px solid rgba(241, 245, 249, 0.12);
 }
 
 .open {
+  visibility: visible;
+  margin-left: 0;
   width: var(--sidebar-width);
 }
 

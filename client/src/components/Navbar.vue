@@ -3,7 +3,9 @@
     class="nav-bar flex pt-4 pb-6 px-[3.5rem] justify-between items-center w-full"
   >
     <div class="self-start p-0 mt-4">
-      <span class="material-symbols-outlined"> menu </span>
+      <span class="material-symbols-rounded cursor-pointer" @click="ToggleMenu">
+        menu
+      </span>
     </div>
     <div class="flex gap-1">
       <Dropdown
@@ -36,6 +38,10 @@
 import router from "@/router";
 import { ref } from "vue";
 
+function ToggleMenu() {
+  document.getElementById("aside").classList.toggle("open");
+}
+
 const signOutHandler = () => {
   router.push("/");
 };
@@ -49,4 +55,9 @@ const cities = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 200;
+  font-size: 2rem;
+}
+</style>

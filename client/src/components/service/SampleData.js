@@ -10,7 +10,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -22,7 +22,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -34,7 +34,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -46,7 +46,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -58,7 +58,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -70,7 +70,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -82,7 +82,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -94,7 +94,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -106,7 +106,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -118,7 +118,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -130,7 +130,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -142,7 +142,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -154,7 +154,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -166,7 +166,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -178,7 +178,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -190,7 +190,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -202,7 +202,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -214,7 +214,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -226,7 +226,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -238,7 +238,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -250,7 +250,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -262,7 +262,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -274,7 +274,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -286,7 +286,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -298,7 +298,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -310,7 +310,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -322,7 +322,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -334,7 +334,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Ongoing",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
       {
@@ -346,7 +346,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Completed",
-        etaw: 3,
+        eta: 3,
         remarks: "Added",
       },
       {
@@ -358,7 +358,7 @@ const data = {
         staffs: 3,
         date: "21/01/2024",
         status: "Pending",
-        etaw: 3,
+        eta: 3,
         remarks: "Not Yet Added",
       },
     ];
