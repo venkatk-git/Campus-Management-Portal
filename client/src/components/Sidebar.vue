@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4"
+    class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4 open"
     id="aside"
   >
     <div
@@ -63,7 +63,7 @@ aside {
   visibility: hidden;
   margin-left: -95px;
   transition: 0.2s ease-in-out;
-  border-right: 0.8px solid rgba(241, 245, 249, 0.12);
+  border-right: 0.8px solid #f1f5f91f;
 }
 
 .open {

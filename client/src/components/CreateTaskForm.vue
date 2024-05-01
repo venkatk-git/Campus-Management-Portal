@@ -52,7 +52,10 @@
               v-for="index in staffsCount"
               :key="index"
             >
-              <label for="username" v-text="`Name ${index}`"></label>
+              <span for="username"
+                >Staff Name {{ index
+                }}<span class="text-red-500"> *</span></span
+              >
               <InputText
                 v-model="staffNames[index - 1]"
                 type="text"

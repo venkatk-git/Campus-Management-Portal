@@ -23,7 +23,7 @@
             inputId="minmax-buttons"
             mode="decimal"
             showButtons
-            :min="0"
+            :min="18"
             :max="100"
             class="w-[15rem]"
           />
@@ -128,7 +128,7 @@ import { ref } from "vue";
 // import PrimeVue from "primevue/config";
 
 const name = ref();
-const age = ref();
+const age = ref(18);
 const gender = ref();
 const category = ref();
 const location = ref();

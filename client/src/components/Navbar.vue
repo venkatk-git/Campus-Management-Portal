@@ -1,8 +1,8 @@
 <template>
   <div
-    class="nav-bar flex pt-4 pb-6 px-[3.5rem] justify-between items-center w-full"
+    class="nav-bar flex pt-4 pb-2 mb-8 px-[3.5rem] justify-between w-full border-b-[0.8px] border-[#f1f5f91f]"
   >
-    <div class="self-start p-0 mt-4">
+    <div class="self-start mt-2 p-0">
       <span class="material-symbols-rounded cursor-pointer" @click="ToggleMenu">
         menu
       </span>
