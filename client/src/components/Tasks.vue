@@ -246,7 +246,6 @@ import Column from "primevue/column";
 import DataTable from "primevue/datatable";
 import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
-import MultiSelect from "primevue/multiselect";
 import Tag from "primevue/tag";
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";

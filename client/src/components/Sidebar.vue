@@ -3,12 +3,11 @@
     class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4 open"
     id="aside"
   >
-    <div
-      class="flex"
-      :class="`${isOpen ? 'expanded mb-5 mt-5 px-4' : 'not-expanded'}`"
-    >
+    <div class="flex" :class="`${isOpen ? 'expanded px-4' : 'not-expanded'}`">
       <div class="profile transition duration-200 ease-in-out">
-        <div class="flex justify-center transition duration-200 ease-in-out">
+        <div
+          class="flex justify-center transition duration-200 ease-in-out py-4"
+        >
           <Logo size="32px" />
         </div>
       </div>
