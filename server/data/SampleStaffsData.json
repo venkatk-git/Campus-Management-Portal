@@ -1,3 +1,302 @@
 [
-    
+  {
+    "id": 10001,
+    "name": "John Doe",
+    "age": 30,
+    "gender": "Male",
+    "category": "Management",
+    "location": "New York",
+    "contactNumber": "+1234567890",
+    "level": "Senior"
+  },
+  {
+    "id": 10002,
+    "name": "Jane Smith",
+    "age": 28,
+    "gender": "Female",
+    "category": "Development",
+    "location": "San Francisco",
+    "contactNumber": "+9876543210",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10003,
+    "name": "Michael Lee",
+    "age": 42,
+    "gender": "Male",
+    "category": "Sales",
+    "location": "Los Angeles",
+    "contactNumber": "+5678901234",
+    "level": "Executive"
+  },
+  {
+    "id": 10004,
+    "name": "Ashley Williams",
+    "age": 35,
+    "gender": "Female",
+    "category": "Marketing",
+    "location": "Chicago",
+    "contactNumber": "+3456789012",
+    "level": "Senior"
+  },
+  {
+    "id": 10005,
+    "name": "David Johnson",
+    "age": 25,
+    "gender": "Male",
+    "category": "Design",
+    "location": "Seattle",
+    "contactNumber": "+7890123456",
+    "level": "Junior"
+  },
+  {
+    "id": 10006,
+    "name": "Emily Garcia",
+    "age": 33,
+    "gender": "Female",
+    "category": "Human Resources",
+    "location": "Austin",
+    "contactNumber": "+1230987654",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10007,
+    "name": "Robert Brown",
+    "age": 45,
+    "gender": "Male",
+    "category": "Engineering",
+    "location": "Denver",
+    "contactNumber": "+9870123456",
+    "level": "Executive"
+  },
+  {
+    "id": 10008,
+    "name": "Amanda Miller",
+    "age": 27,
+    "gender": "Female",
+    "category": "Customer Success",
+    "location": "Atlanta",
+    "contactNumber": "+5670981234",
+    "level": "Junior"
+  },
+  {
+    "id": 10009,
+    "name": "Kevin Chen",
+    "age": 38,
+    "gender": "Male",
+    "category": "Finance",
+    "location": "Houston",
+    "contactNumber": "+3450123456",
+    "level": "Senior"
+  },
+  {
+    "id": 10010,
+    "name": "Sarah Hernandez",
+    "age": 31,
+    "gender": "Female",
+    "category": "Operations",
+    "location": "Miami",
+    "contactNumber": "+7890345678",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10011,
+    "name": "William Moore",
+    "age": 40,
+    "gender": "Male",
+    "category": "IT",
+    "location": "Phoenix",
+    "contactNumber": "+1234789012",
+    "level": "Executive"
+  },
+  {
+    "id": 10012,
+    "name": "Jennifer Lopez",
+    "age": 29,
+    "gender": "Female",
+    "category": "Content",
+    "location": "Atlanta",
+    "contactNumber": "+5670981234",
+    "level": "Executive"
+  },
+  {
+    "id": 10013,
+    "name": "Daniel Robinson",
+    "age": 32,
+    "gender": "Male",
+    "category": "Legal",
+    "location": "San Antonio",
+    "contactNumber": "+9874561230",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10014,
+    "name": "Jessica Garcia",
+    "age": 24,
+    "gender": "Female",
+    "category": "Public Relations",
+    "location": "San Diego",
+    "contactNumber": "+5674567890",
+    "level": "Junior"
+  },
+  {
+    "id": 10015,
+    "name": "Andrew Young",
+    "age": 48,
+    "gender": "Male",
+    "category": "Management",
+    "location": "Dallas",
+    "contactNumber": "+3454561230",
+    "level": "Executive"
+  },
+  {
+    "id": 10016,
+    "name": "Evelyn Hernandez",
+    "age": 36,
+    "gender": "Female",
+    "category": "Development",
+    "location": "Charlotte",
+    "contactNumber": "+7894567812",
+    "level": "Senior"
+  },
+  {
+    "id": 10017,
+    "name": "Matthew Miller",
+    "age": 26,
+    "gender": "Male",
+    "category": "Sales",
+    "location": "Baltimore",
+    "contactNumber": "+1238901234",
+    "level": "Junior"
+  },
+  {
+    "id": 10018,
+    "name": "Michelle Lee",
+    "age": 34,
+    "gender": "Female",
+    "category": "Marketing",
+    "location": "Detroit",
+    "contactNumber": "+9878903456",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10019,
+    "name": "Christopher Thomas",
+    "age": 43,
+    "gender": "Male",
+    "category": "Design",
+    "location": "Memphis",
+    "contactNumber": "+5678123456",
+    "level": "Executive"
+  },
+  {
+    "id": 10020,
+    "name": "Ashley Gonzalez",
+    "age": 29,
+    "gender": "Female",
+    "category": "Human Resources",
+    "location": "Jacksonville",
+    "contactNumber": "+3458123478",
+    "level": "Junior"
+  },
+  {
+    "id": 10021,
+    "name": "Daniel Brown",
+    "age": 37,
+    "gender": "Male",
+    "category": "Engineering",
+    "location": "Indianapolis",
+    "contactNumber": "+7898125678",
+    "level": "Senior"
+  },
+  {
+    "id": 10022,
+    "name": "Sarah Lopez",
+    "age": 30,
+    "gender": "Female",
+    "category": "Customer Success",
+    "location": "Columbus",
+    "contactNumber": "+1236789012",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10023,
+    "name": "William Jackson",
+    "age": 41,
+    "gender": "Male",
+    "category": "Finance",
+    "location": "Fort Worth",
+    "contactNumber": "+9876541230",
+    "level": "Executive"
+  },
+  {
+    "id": 10024,
+    "name": "Jennifer Moore",
+    "age": 23,
+    "gender": "Female",
+    "category": "Operations",
+    "location": "El Paso",
+    "contactNumber": "+5676547890",
+    "level": "Junior"
+  },
+  {
+    "id": 10025,
+    "name": "Andrew Robinson",
+    "age": 47,
+    "gender": "Male",
+    "category": "IT",
+    "location": "Oklahoma City",
+    "contactNumber": "+3456541230",
+    "level": "Senior"
+  },
+  {
+    "id": 10026,
+    "name": "Evelyn Garcia",
+    "age": 35,
+    "gender": "Female",
+    "category": "Legal",
+    "location": "Las Vegas",
+    "contactNumber": "+7896547812",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10027,
+    "name": "Matthew Hernandez",
+    "age": 25,
+    "gender": "Male",
+    "category": "Public Relations",
+    "location": "Nashville",
+    "contactNumber": "+1234569878",
+    "level": "Junior"
+  },
+  {
+    "id": 10028,
+    "name": "Michelle Young",
+    "age": 33,
+    "gender": "Female",
+    "category": "Content",
+    "location": "Seattle",
+    "contactNumber": "+9874563456",
+    "level": "Mid-Level"
+  },
+  {
+    "id": 10029,
+    "name": "Christopher Thomas",
+    "age": 42,
+    "gender": "Male",
+    "category": "Management",
+    "location": "Denver",
+    "contactNumber": "+5674561234",
+    "level": "Executive"
+  },
+  {
+    "id": 10030,
+    "name": "Ashley Miller",
+    "age": 28,
+    "gender": "Female",
+    "category": "Development",
+    "location": "Portland",
+    "contactNumber": "+3454567812",
+    "level": "Junior"
+  }
 ]
