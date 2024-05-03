@@ -4,6 +4,20 @@ const staffs = JSON.parse(
   fs.readFileSync(`${__dirname}/../data/SampleStaffsData.json`)
 );
 
+exports.checkId = (req, res, next) => {
+  const id = req.params.id * 1;
+  const staff = staffs.find((t) => t.id == id);
+
+  if (!staff) {
+    return res.status(404).json({
+      status: "failed",
+      message: "Invalid ID",
+    });
+  }
+
+  next();
+};
+
 exports.getAllStaffs = (req, res) => {
   res.status(200).json({
     status: "success",
@@ -16,16 +30,7 @@ exports.getAllStaffs = (req, res) => {
 
 exports.getStaff = (req, res) => {
   const id = req.params.id * 1;
-
   const staff = staffs.find((t) => t.id == id);
-
-  if (!staff) {
-    res.status(404).json({
-      status: "failed",
-      message: "Invalid ID",
-    });
-  }
-
   res.status(200).json({
     status: "success",
     results: staff.length,

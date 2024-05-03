@@ -226,7 +226,6 @@ const filters = ref({
 });
 const genders = ref(["Male", "Female"]);
 const category = ref(["Category A", "Category B", "Category C"]);
-const statuses = ref(["Completed", "Pending", "Ongoing"]);
 const locations = ref(["Block A", "Block B", "Block C"]);
 const levels = ref(["I", "II", "III"]);
 const loading = ref(true);

@@ -5,7 +5,7 @@
     />
     <div class="flex flex-col items-center w-full">
       <Navbar
-        v-if="
+        v-if="  
           route.path != '/' && route.path != '/login' && route.path != '/404'
         "
       />
