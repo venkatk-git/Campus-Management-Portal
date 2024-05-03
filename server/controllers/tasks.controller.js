@@ -1,14 +1,9 @@
-const fs = require("fs");
-
-const tasks = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/SampleTasksData.json`)
-);
+const Task = require("../models/task.model");
 
 exports.checkId = (req, res, next) => {
   const id = req.params.id * 1;
-  const task = tasks.find((t) => t.id == id);
 
-  if (!task) {
+  if (!id < 0) {
     return res.status(404).json({
       status: "failed",
       message: "Invalid ID",
@@ -18,7 +13,8 @@ exports.checkId = (req, res, next) => {
   next();
 };
 
-exports.getAllTasks = (req, res) => {
+exports.getAllTasks = async (req, res) => {
+  const tasks = await Task.find();
   res.status(200).json({
     status: "success",
     results: tasks.length,
@@ -28,9 +24,9 @@ exports.getAllTasks = (req, res) => {
   });
 };
 
-exports.getTask = (req, res) => {
+exports.getTask = async (req, res) => {
   const id = req.params.id * 1;
-  const task = tasks.find((t) => t.id == id);
+  const task = await Task.findOne({ id: id });
 
   res.status(200).json({
     status: "success",
@@ -40,14 +36,15 @@ exports.getTask = (req, res) => {
   });
 };
 
-exports.postTask = (req, res) => {
-  const taskId = tasks[tasks.length - 1].id + 1;
-  const newTask = Object.assign({ id: taskId }, req.body);
+exports.postTask = async (req, res) => {
+  const tasks = await Task.find();
+  const taskId = tasks[tasks.length - 1].id + 8;
+  const newTask = new Task(Object.assign({ id: taskId }, req.body));
+
+  await newTask.save();
 
   res.status(201).json({
     status: "success",
-    data: {
-      newTask,
-    },
+    data: newTask,
   });
 };

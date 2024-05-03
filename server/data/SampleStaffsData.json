@@ -6,7 +6,7 @@
     "gender": "Male",
     "category": "Management",
     "location": "New York",
-    "contactNumber": "+1234567890",
+    "contact": 1234567890,
     "level": "Senior"
   },
   {
@@ -16,7 +16,7 @@
     "gender": "Female",
     "category": "Development",
     "location": "San Francisco",
-    "contactNumber": "+9876543210",
+    "contact": 9876543210,
     "level": "Mid-Level"
   },
   {
@@ -26,7 +26,7 @@
     "gender": "Male",
     "category": "Sales",
     "location": "Los Angeles",
-    "contactNumber": "+5678901234",
+    "contact": 5678901234,
     "level": "Executive"
   },
   {
@@ -36,7 +36,7 @@
     "gender": "Female",
     "category": "Marketing",
     "location": "Chicago",
-    "contactNumber": "+3456789012",
+    "contact": 3456789012,
     "level": "Senior"
   },
   {
@@ -46,7 +46,7 @@
     "gender": "Male",
     "category": "Design",
     "location": "Seattle",
-    "contactNumber": "+7890123456",
+    "contact": 7890123456,
     "level": "Junior"
   },
   {
@@ -56,7 +56,7 @@
     "gender": "Female",
     "category": "Human Resources",
     "location": "Austin",
-    "contactNumber": "+1230987654",
+    "contact": 1230987654,
     "level": "Mid-Level"
   },
   {
@@ -66,7 +66,7 @@
     "gender": "Male",
     "category": "Engineering",
     "location": "Denver",
-    "contactNumber": "+9870123456",
+    "contact": 9870123456,
     "level": "Executive"
   },
   {
@@ -76,7 +76,7 @@
     "gender": "Female",
     "category": "Customer Success",
     "location": "Atlanta",
-    "contactNumber": "+5670981234",
+    "contact": 5670981234,
     "level": "Junior"
   },
   {
@@ -86,7 +86,7 @@
     "gender": "Male",
     "category": "Finance",
     "location": "Houston",
-    "contactNumber": "+3450123456",
+    "contact": 3450123456,
     "level": "Senior"
   },
   {
@@ -96,7 +96,7 @@
     "gender": "Female",
     "category": "Operations",
     "location": "Miami",
-    "contactNumber": "+7890345678",
+    "contact": 7890345678,
     "level": "Mid-Level"
   },
   {
@@ -106,7 +106,7 @@
     "gender": "Male",
     "category": "IT",
     "location": "Phoenix",
-    "contactNumber": "+1234789012",
+    "contact": 1234789012,
     "level": "Executive"
   },
   {
@@ -116,7 +116,7 @@
     "gender": "Female",
     "category": "Content",
     "location": "Atlanta",
-    "contactNumber": "+5670981234",
+    "contact": 5670981234,
     "level": "Executive"
   },
   {
@@ -126,7 +126,7 @@
     "gender": "Male",
     "category": "Legal",
     "location": "San Antonio",
-    "contactNumber": "+9874561230",
+    "contact": 9874561230,
     "level": "Mid-Level"
   },
   {
@@ -136,7 +136,7 @@
     "gender": "Female",
     "category": "Public Relations",
     "location": "San Diego",
-    "contactNumber": "+5674567890",
+    "contact": 5674567890,
     "level": "Junior"
   },
   {
@@ -146,7 +146,7 @@
     "gender": "Male",
     "category": "Management",
     "location": "Dallas",
-    "contactNumber": "+3454561230",
+    "contact": 3454561230,
     "level": "Executive"
   },
   {
@@ -156,7 +156,7 @@
     "gender": "Female",
     "category": "Development",
     "location": "Charlotte",
-    "contactNumber": "+7894567812",
+    "contact": 7894567812,
     "level": "Senior"
   },
   {
@@ -166,7 +166,7 @@
     "gender": "Male",
     "category": "Sales",
     "location": "Baltimore",
-    "contactNumber": "+1238901234",
+    "contact": 1238901234,
     "level": "Junior"
   },
   {
@@ -176,7 +176,7 @@
     "gender": "Female",
     "category": "Marketing",
     "location": "Detroit",
-    "contactNumber": "+9878903456",
+    "contact": 9878903456,
     "level": "Mid-Level"
   },
   {
@@ -186,7 +186,7 @@
     "gender": "Male",
     "category": "Design",
     "location": "Memphis",
-    "contactNumber": "+5678123456",
+    "contact": 5678123456,
     "level": "Executive"
   },
   {
@@ -196,7 +196,7 @@
     "gender": "Female",
     "category": "Human Resources",
     "location": "Jacksonville",
-    "contactNumber": "+3458123478",
+    "contact": 3458123478,
     "level": "Junior"
   },
   {
@@ -206,7 +206,7 @@
     "gender": "Male",
     "category": "Engineering",
     "location": "Indianapolis",
-    "contactNumber": "+7898125678",
+    "contact": 7898125678,
     "level": "Senior"
   },
   {
@@ -216,7 +216,7 @@
     "gender": "Female",
     "category": "Customer Success",
     "location": "Columbus",
-    "contactNumber": "+1236789012",
+    "contact": 1236789012,
     "level": "Mid-Level"
   },
   {
@@ -226,7 +226,7 @@
     "gender": "Male",
     "category": "Finance",
     "location": "Fort Worth",
-    "contactNumber": "+9876541230",
+    "contact": 9876541230,
     "level": "Executive"
   },
   {
@@ -236,7 +236,7 @@
     "gender": "Female",
     "category": "Operations",
     "location": "El Paso",
-    "contactNumber": "+5676547890",
+    "contact": 5676547890,
     "level": "Junior"
   },
   {
@@ -246,7 +246,7 @@
     "gender": "Male",
     "category": "IT",
     "location": "Oklahoma City",
-    "contactNumber": "+3456541230",
+    "contact": 3456541230,
     "level": "Senior"
   },
   {
@@ -256,7 +256,7 @@
     "gender": "Female",
     "category": "Legal",
     "location": "Las Vegas",
-    "contactNumber": "+7896547812",
+    "contact": 7896547812,
     "level": "Mid-Level"
   },
   {
@@ -266,7 +266,7 @@
     "gender": "Male",
     "category": "Public Relations",
     "location": "Nashville",
-    "contactNumber": "+1234569878",
+    "contact": 1234569878,
     "level": "Junior"
   },
   {
@@ -276,7 +276,7 @@
     "gender": "Female",
     "category": "Content",
     "location": "Seattle",
-    "contactNumber": "+9874563456",
+    "contact": 9874563456,
     "level": "Mid-Level"
   },
   {
@@ -286,7 +286,7 @@
     "gender": "Male",
     "category": "Management",
     "location": "Denver",
-    "contactNumber": "+5674561234",
+    "contact": 5674561234,
     "level": "Executive"
   },
   {
@@ -296,7 +296,7 @@
     "gender": "Female",
     "category": "Development",
     "location": "Portland",
-    "contactNumber": "+3454567812",
+    "contact": 3454567812,
     "level": "Junior"
   }
 ]

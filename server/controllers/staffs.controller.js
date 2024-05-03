@@ -1,10 +1,7 @@
-const fs = require("fs");
+const Staff = require("../models/staff.model");
 
-const staffs = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/SampleStaffsData.json`)
-);
-
-exports.checkId = (req, res, next) => {
+exports.checkId = async (req, res, next) => {
+  const staffs = await Staff.find();
   const id = req.params.id * 1;
   const staff = staffs.find((t) => t.id == id);
 
@@ -18,7 +15,8 @@ exports.checkId = (req, res, next) => {
   next();
 };
 
-exports.getAllStaffs = (req, res) => {
+exports.getAllStaffs = async (req, res) => {
+  const staffs = await Staff.find();
   res.status(200).json({
     status: "success",
     results: staffs.length,
@@ -28,7 +26,9 @@ exports.getAllStaffs = (req, res) => {
   });
 };
 
-exports.getStaff = (req, res) => {
+exports.getStaff = async (req, res) => {
+  const staffs = await Staff.find();
+
   const id = req.params.id * 1;
   const staff = staffs.find((t) => t.id == id);
   res.status(200).json({
@@ -40,9 +40,13 @@ exports.getStaff = (req, res) => {
   });
 };
 
-exports.postStaff = (req, res) => {
-  const staffId = staffs[staffs.length - 1].id + 1;
-  const newStaff = Object.assign({ id: staffId }, req.body);
+exports.postStaff = async (req, res) => {
+  const staffs = await Staff.find();
+
+  const staffId = staffs[staffs.length - 1].id + 5;
+  const newStaff = new Staff(Object.assign({ id: staffId }, req.body));
+
+  await newStaff.save();
 
   res.status(201).json({
     status: "success",

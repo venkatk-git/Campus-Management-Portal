@@ -14,7 +14,6 @@ mongoose
     console.log(err);
   });
 
-
 app.listen(PORT, () => {
   console.log(`Server listening on PORT ${PORT}`);
 });

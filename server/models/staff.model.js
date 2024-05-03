@@ -4,6 +4,7 @@ const staffSchema = new mongoose.Schema({
   id: {
     type: Number,
     require: [true, "A staff must have a id"],
+    unique: true,
   },
   name: {
     type: String,
@@ -29,7 +30,7 @@ const staffSchema = new mongoose.Schema({
     type: String,
     default: "I",
   },
-  conatact: {
+  contact: {
     type: Number,
     required: [true, "A staff must have a contact number"],
   },

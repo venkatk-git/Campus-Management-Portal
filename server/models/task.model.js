@@ -15,9 +15,14 @@ const taskSchema = new mongoose.Schema({
   id: {
     type: Number,
     require: [true, "A task must have a id"],
+    unique: true,
+  },
+  supervisor_id: {
+    type: String,
+    required: [true, "A task must have a supervisor id"],
   },
   date: {
-    type: Date,
+    type: String,
     default: formatDate(new Date().toLocaleDateString("en-IN")),
   },
   name: {
