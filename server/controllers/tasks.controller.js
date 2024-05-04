@@ -1,4 +1,5 @@
 const Task = require("../models/task.model");
+const catchAsync = require("../utils/catchAsync");
 
 exports.checkId = (req, res, next) => {
   const id = req.params.id * 1;
@@ -13,7 +14,7 @@ exports.checkId = (req, res, next) => {
   next();
 };
 
-exports.getAllTasks = async (req, res) => {
+exports.getAllTasks = catchAsync(async (req, res) => {
   const tasks = await Task.find();
   res.status(200).json({
     status: "success",
@@ -22,9 +23,9 @@ exports.getAllTasks = async (req, res) => {
       tasks,
     },
   });
-};
+});
 
-exports.getTask = async (req, res) => {
+exports.getTask = catchAsync(async (req, res) => {
   const id = req.params.id * 1;
   const task = await Task.findOne({ id: id });
 
@@ -34,9 +35,9 @@ exports.getTask = async (req, res) => {
       task,
     },
   });
-};
+});
 
-exports.postTask = async (req, res) => {
+exports.postTask = catchAsync(async (req, res) => {
   const tasks = await Task.find();
   const taskId = tasks[tasks.length - 1].id + 8;
   const newTask = new Task(Object.assign({ id: taskId }, req.body));
@@ -47,4 +48,4 @@ exports.postTask = async (req, res) => {
     status: "success",
     data: newTask,
   });
-};
+});

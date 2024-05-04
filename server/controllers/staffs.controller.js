@@ -1,4 +1,5 @@
 const Staff = require("../models/staff.model");
+const catchAsync = require("../utils/catchAsync");
 
 exports.checkId = async (req, res, next) => {
   const staffs = await Staff.find();
@@ -15,7 +16,7 @@ exports.checkId = async (req, res, next) => {
   next();
 };
 
-exports.getAllStaffs = async (req, res) => {
+exports.getAllStaffs = catchAsync(async (req, res) => {
   const staffs = await Staff.find();
   res.status(200).json({
     status: "success",
@@ -24,9 +25,9 @@ exports.getAllStaffs = async (req, res) => {
       staffs,
     },
   });
-};
+});
 
-exports.getStaff = async (req, res) => {
+exports.getStaff = catchAsync(async (req, res) => {
   const staffs = await Staff.find();
 
   const id = req.params.id * 1;
@@ -38,9 +39,9 @@ exports.getStaff = async (req, res) => {
       staff,
     },
   });
-};
+});
 
-exports.postStaff = async (req, res) => {
+exports.postStaff = catchAsync(async (req, res) => {
   const staffs = await Staff.find();
 
   const staffId = staffs[staffs.length - 1].id + 5;
@@ -54,4 +55,4 @@ exports.postStaff = async (req, res) => {
       newStaff,
     },
   });
-};
+});

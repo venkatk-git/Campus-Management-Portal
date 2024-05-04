@@ -249,7 +249,6 @@ import InputText from "primevue/inputtext";
 import Tag from "primevue/tag";
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";
-import CustomerService from "./service/CustomerService";
 import data from "@/components/service/SampleData";
 const tasks = ref();
 const customers = ref();

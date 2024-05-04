@@ -2,6 +2,7 @@ const util = require("util");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
+const catchAsync = require("../utils/catchAsync");
 
 const signToken = (email) => {
   return jwt.sign({ email }, process.env.JWT_SECRET, {
@@ -9,7 +10,7 @@ const signToken = (email) => {
   });
 };
 
-exports.signup = async (req, res) => {
+exports.signup = catchAsync(async (req, res) => {
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -25,9 +26,9 @@ exports.signup = async (req, res) => {
       token,
     },
   });
-};
+});
 
-exports.login = async (req, res) => {
+exports.login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(400).json({
@@ -54,9 +55,9 @@ exports.login = async (req, res) => {
       token,
     },
   });
-};
+});
 
-exports.protect = async (req, res, next) => {
+exports.protect = catchAsync(async (req, res, next) => {
   let token;
 
   if (
@@ -95,7 +96,7 @@ exports.protect = async (req, res, next) => {
   req.user = user;
 
   next();
-};
+});
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

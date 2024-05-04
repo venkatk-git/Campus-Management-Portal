@@ -14,6 +14,7 @@ router
     authController.restrictTo("supervisor", "admin"),
     staffsController.postStaff
   );
+
 router.route("/:id").get(authController.protect, staffsController.getStaff);
 
 module.exports = router;
