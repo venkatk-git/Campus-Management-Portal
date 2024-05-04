@@ -1,16 +1,12 @@
 const Task = require("../models/task.model");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appErrors");
 
 exports.checkId = (req, res, next) => {
   const id = req.params.id * 1;
-
-  if (!id < 0) {
-    return res.status(404).json({
-      status: "failed",
-      message: "Invalid ID",
-    });
+  if (id < 0) {
+    return next(new AppError("Invalid ID", 400));
   }
-
   next();
 };
 
@@ -25,9 +21,13 @@ exports.getAllTasks = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTask = catchAsync(async (req, res) => {
+exports.getTask = catchAsync(async (req, res,next) => {
   const id = req.params.id * 1;
   const task = await Task.findOne({ id: id });
+
+  if(!task ){
+    return next(new AppError("Task not found with that id",404))
+  }
 
   res.status(200).json({
     status: "success",
