@@ -1,9 +1,10 @@
+const util = require("util");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 
-const signToken = (email, role) => {
-  return jwt.sign({ email, role }, process.env.JWT_SECRET, {
+const signToken = (email) => {
+  return jwt.sign({ email }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
@@ -16,7 +17,7 @@ exports.signup = async (req, res) => {
     role: req.body.role,
   });
 
-  const token = signToken(newUser.email, newUser.role);
+  const token = signToken(newUser.email);
   res.status(201).json({
     status: "success",
     data: {
@@ -44,7 +45,7 @@ exports.login = async (req, res) => {
     });
   }
 
-  const token = await signToken(user.email, user.role);
+  const token = await signToken(user.email);
 
   res.status(200).json({
     status: "success",
@@ -53,4 +54,58 @@ exports.login = async (req, res) => {
       token,
     },
   });
+};
+
+exports.protect = async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({
+      status: "failed",
+      message: "You are not logged in ",
+    });
+  }
+
+  let decoded;
+  try {
+    decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return res.status(401).json({
+      status: "failed",
+      message: error.message,
+    });
+  }
+
+  const user = await User.findOne({ email: decoded.email });
+
+  if (!user) {
+    return res.status(401).json({
+      status: "failed",
+      message: "User not found",
+    });
+  }
+
+  req.user = user;
+
+  next();
+};
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        status: "failed",
+        message: "You don't have the permission to perform this action",
+      });
+    }
+
+    next();
+  };
 };
