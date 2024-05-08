@@ -176,6 +176,8 @@
 <script setup>
 import { reactive, ref } from "vue";
 import Button from "primevue/button";
+import axios from "axios";
+import api from "@/api/api";
 
 const name = ref();
 const date = ref();
@@ -201,29 +203,60 @@ const createNameField = () => {
   console.log(staffsCount.value);
 };
 
-const handleCreateAndAnother = () => {
+const handleCreateAndAnother = async () => {
   const obj = {
     name: name.value,
     category: category.value,
     location: location.value,
     status: status.value,
-    remark: remark.value,
-    staffNames: staffNames.value,
+    eta: eta.value,
+    remarks: remark.value,
+    staffsCount: staffsCount.value,
+    staffsId: staffNames.value,
   };
-  console.log(obj);
+  try {
+    await axios.post(`${api}/tasks`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    name.value = "";
+    category.value = "";
+    location.value = "";
+    status.value = "";
+    eta.value = "";
+    remark.value = "";
+    staffsCount.value = 1;
+    staffNames.value = "";
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
-// const handleCreate = () => {
-//   const obj = {
-//     name: name.value,
-//     date: date.value,
-//     gender: gender.value,
-//     staffsCount: staffsCount.value,
-//     eta: eta.value,
-//     contact: contact.value,
-//   };
-//   console.log(obj);
-// };
+const handleCreate = async () => {
+  const obj = {
+    name: name.value,
+    category: category.value,
+    location: location.value,
+    status: status.value,
+    eta: eta.value,
+    remarks: remark.value,
+    staffsCount: staffsCount.value,
+    staffsId: staffNames.value,
+  };
+  try {
+    await axios.post(`${api}/tasks`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 </script>
 
 <style scoped>

@@ -15,16 +15,31 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import InputField from "./InputField.vue";
 import { useRouter } from "vue-router";
+import api from "@/api/api";
 const router = useRouter();
 
-function validateAuth(params) {
+async function validateAuth(params) {
   let mail = document.getElementById("email").value;
   let password = document.getElementById("password").value;
-  if (mail == "user@gmail.com" && password == "123") {
+  const res = await axios.post(
+    `${api}/users/login`,
+    {
+      email: mail,
+      password,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if (res.status == 200) {
+    localStorage.setItem("token", res.data.data.token);
     localStorage.setItem("auth", true);
-    localStorage.setItem("user", "supervisor");
+    localStorage.setItem("user", res.data.data.user);
     router.push("/dashboard/analytics");
   }
 }

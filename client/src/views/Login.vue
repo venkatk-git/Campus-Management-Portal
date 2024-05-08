@@ -16,5 +16,5 @@
 </template>
 <script setup>
 import Logo from "../components/Logo.vue";
-import Form from "../components/Form.vue";
+import Form from "../components/LoginForm.vue";
 </script>

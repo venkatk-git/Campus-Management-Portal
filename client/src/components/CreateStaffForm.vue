@@ -90,8 +90,8 @@
           <InputMask
             id="phone"
             v-model="contact"
-            mask="(999) 999-9999"
-            placeholder="(999) 999-9999"
+            mask="9999999999"
+            placeholder="9999999999"
             class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
           />
         </div>
@@ -125,7 +125,9 @@
 
 <script setup>
 import { ref } from "vue";
-// import PrimeVue from "primevue/config";
+import axios from "axios";
+import api from "@/api/api";
+import router from "@/router";
 
 const name = ref();
 const age = ref(18);
@@ -149,7 +151,7 @@ const locations = ref([
   "Location E",
 ]);
 
-const handleCreateAndAnother = () => {
+const handleCreateAndAnother = async () => {
   const obj = {
     name: name.value,
     age: age.value,
@@ -158,10 +160,26 @@ const handleCreateAndAnother = () => {
     location: location.value,
     contact: contact.value,
   };
-  console.log(obj);
+
+  try {
+    await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    name.value = "";
+    age.value = 18;
+    gender.value = "";
+    category.value = "";
+    location.value = "";
+    contact.value = undefined;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
-const handleCreate = () => {
+const handleCreate = async () => {
   const obj = {
     name: name.value,
     age: age.value,
@@ -171,6 +189,13 @@ const handleCreate = () => {
     contact: contact.value,
   };
   console.log(obj);
+  await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  router.push("/dashboard/staffs");
 };
 </script>
 

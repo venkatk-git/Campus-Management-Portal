@@ -41,6 +41,10 @@ const taskSchema = new mongoose.Schema({
     type: Number,
     require: [true, "A task must have the number of staffs working"],
   },
+  staffsId: {
+    type: Array,
+    default: ["01", "02"],
+  },
   eta: {
     type: Number,
     require: [true, "A task must have a estimated time"],

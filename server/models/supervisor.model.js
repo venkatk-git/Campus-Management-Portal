@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const staffSchema = new mongoose.Schema({
+const supervisorSchema = new mongoose.Schema({
   id: {
     type: Number,
     require: [true, "A staff must have a id"],
@@ -26,14 +26,10 @@ const staffSchema = new mongoose.Schema({
     type: String,
     default: "Sathy",
   },
-  level: {
-    type: String,
-    default: "Low-level",
-  },
   contact: {
     type: Number,
     required: [true, "A staff must have a contact number"],
   },
 });
 
-module.exports = mongoose.model("Staff", staffSchema);
+module.exports = mongoose.model("Supervisor", supervisorSchema);

@@ -19,7 +19,7 @@
           'category',
           'location',
           'level',
-          'contactNumber',
+          'contact',
         ]"
       >
         <template #header>
@@ -177,12 +177,12 @@
           </template>
         </Column>
         <Column
-          filterField="contactNumber"
+          filterField="contact"
           header="Contact Number"
           style="min-width: 12rem"
         >
           <template #body="{ data }">
-            {{ data.contactNumber }}
+            {{ data.contact }}
           </template>
           <template #filter="{ filterModel, filterCallback }">
             <InputText
@@ -200,15 +200,11 @@
 </template>
 
 <script setup>
-import Column from "primevue/column";
-import DataTable from "primevue/datatable";
-import Dropdown from "primevue/dropdown";
-import InputText from "primevue/inputtext";
-import MultiSelect from "primevue/multiselect";
-import Tag from "primevue/tag";
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";
 import data from "@/components/service/SampleStaffs.js";
+import axios from "axios";
+import api from "@/api/api";
 const tasks = ref();
 const customers = ref();
 const staffs = ref();
@@ -222,19 +218,32 @@ const filters = ref({
   location: { value: null, matchMode: FilterMatchMode.CONTAINS },
   gender: { value: null, matchMode: FilterMatchMode.EQUALS },
   level: { value: null, matchMode: FilterMatchMode.EQUALS },
-  contactNumber: { value: null, matchMode: FilterMatchMode.EQUALS },
+  contact: { value: null, matchMode: FilterMatchMode.EQUALS },
 });
 const genders = ref(["Male", "Female"]);
 const category = ref(["Category A", "Category B", "Category C"]);
 const locations = ref(["Block A", "Block B", "Block C"]);
-const levels = ref(["I", "II", "III"]);
+const levels = ref(["Low-Level", "Mid-Level", "Senior"]);
 const loading = ref(true);
 
-onMounted(() => {
-  data.getTasks().then((data) => {
-    staffs.value = data;
-    loading.value = false;
+let fetchedData;
+
+onMounted(async () => {
+  // data.getTasks().then((data) => {
+  //   staffs.value = data;
+  //   loading.value = false;
+  // });
+
+  fetchedData = await axios.get(`${api}/staffs`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   });
+
+  console.log(fetchedData);
+
+  staffs.value = fetchedData.data.data.staffs;
+  loading.value = false;
   //   data.getTasks().then((data) => {
   //     console.log(data);
   //     tasks.value = data;
@@ -242,22 +251,6 @@ onMounted(() => {
   //   });
 });
 
-// const getCustomers = (data) => {
-//   return [...(data || [])].map((d) => {
-//     d.date = new Date(d.date);
-//     return d;
-//   });
-// };
-// const formatDate = (value) => {
-//   return value.toLocaleDateString("en-US", {
-//     day: "2-digit",
-//     month: "2-digit",
-//     year: "numeric",
-//   });
-// };
-// const formatCurrency = (value) => {
-//   return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-// };
 const getSeverity = (status) => {
   switch (status) {
     case "Completed":

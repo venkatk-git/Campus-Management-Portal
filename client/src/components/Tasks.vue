@@ -18,7 +18,7 @@
           'category',
           'location',
           'eta',
-          'staffs',
+          'staffsCount',
           'status',
           'remarks',
         ]"
@@ -41,8 +41,8 @@
             </span>
           </div>
         </template>
-        <template #empty> No customers found. </template>
-        <template #loading> Loading customers data. Please wait. </template>
+        <template #empty> No Tasks found. </template>
+        <template #loading> Loading Tasks data. Please wait. </template>
         <Column filterField="id" header="Task ID" style="min-width: 12rem">
           <template #body="{ data }">
             {{ data.id }}
@@ -69,23 +69,11 @@
               class="p-column-filter"
               placeholder="Search by date"
             />
-            <!-- <Calendar
-              v-model="filterModel.value"
-              @change="filterCallback()"
-              class="p-column-filter"
-              dateFormat="dd/mm/yy"
-            /> -->
           </template>
         </Column>
         <Column header="Name" filterField="name" style="min-width: 12rem">
           <template #body="{ data }">
             <div class="flex items-center gap-2">
-              <!-- <img
-                alt="flag"
-                src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                :class="`flag flag-${data.country.code}`"
-                style="width: 24px"
-              /> -->
               <span>{{ data.name }}</span>
             </div>
           </template>
@@ -159,7 +147,7 @@
           style="min-width: 4rem"
         >
           <template #body="{ data }">
-            <span>{{ data.staffs }}</span>
+            <span>{{ data.staffsCount }}</span>
           </template>
           <template #filter="{ filterModel, filterCallback }">
             <InputText
@@ -217,14 +205,6 @@
         <Column header="Remarks" filterField="remarks" style="min-width: 12rem">
           <template #body="{ data }">
             <span>{{ data.remarks }}</span>
-            <!-- <div class="flex items-center gap-2">
-              <InputText
-                v-if="userType == 'supervisor'"
-                v-model="data.remarks"
-                :placeholder="value"
-                class="pl-10 font-normal bg-transparent border-[#ffffff4e]"
-              />
-            </div> -->
           </template>
           <template #filter="{ filterModel, filterCallback }">
             <InputText
@@ -242,16 +222,12 @@
 </template>
 
 <script setup>
-import Column from "primevue/column";
-import DataTable from "primevue/datatable";
-import Dropdown from "primevue/dropdown";
-import InputText from "primevue/inputtext";
-import Tag from "primevue/tag";
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";
 import data from "@/components/service/SampleData";
+import axios from "axios";
+import api from "@/api/api";
 const tasks = ref();
-const customers = ref();
 const date = ref();
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -271,16 +247,22 @@ const locations = ref(["Block A", "Block B", "Block C"]);
 const loading = ref(true);
 // const userType = ref(localstorage.getItem("user"));
 
-onMounted(() => {
-  CustomerService.getCustomersMedium().then((data) => {
-    customers.value = data;
-    loading.value = false;
+let fetchedData;
+
+onMounted(async () => {
+  // data.getTasks().then(async (data) => {
+  // });
+  fetchedData = await axios.get(`${api}/tasks`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   });
-  data.getTasks().then((data) => {
-    console.log(data);
-    tasks.value = data;
-    loading.value = false;
-  });
+  // console.log(fetchedData.data.data.tasks);
+  // tasks.value = data;
+  // console.log(data);
+  tasks.value = fetchedData.data.data.tasks;
+  console.log(tasks.value);
+  loading.value = false;
 });
 
 const getSeverity = (status) => {

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.49.0",
+    "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "primeicons": "^7.0.0",
     "primevue": "^3.52.0",
