@@ -38,6 +38,22 @@
             <span class="material-icons">edit_document</span>
             <span class="text">Create Staff</span>
           </router-link>
+          <router-link class="button" to="/dashboard/createstaff">
+            <span class="material-icons">edit_document</span>
+            <span class="text">Faculties</span>
+          </router-link>
+          <router-link class="button" to="/dashboard/createstaff">
+            <span class="material-icons">edit_document</span>
+            <span class="text">Create Faculty</span>
+          </router-link>
+          <router-link class="button" to="/dashboard/createstaff">
+            <span class="material-icons">edit_document</span>
+            <span class="text">Supervisors</span>
+          </router-link>
+          <router-link class="button" to="/dashboard/createstaff">
+            <span class="material-icons">edit_document</span>
+            <span class="text">Create Supervisor</span>
+          </router-link>
         </div>
       </div>
     </div>

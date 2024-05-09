@@ -1,56 +1,59 @@
-const Staff = require("../models/staff.model");
+const Supervisor = require("../models/supervisor.model");
 const AppError = require("../utils/appErrors");
 const catchAsync = require("../utils/catchAsync");
 
-exports.checkId = (req, res, next) => {
-  const id = req.params.id * 1;
-  if (id < 0) {
-    return next(new AppError("Invalid ID", 400));
-  }
-  next();
-};
-
-exports.getAllSupervisor = catchAsync(async (req, res) => {
-  const staffs = await Staff.find();
+exports.getAllSupervisors = catchAsync(async (req, res) => {
+  const supervisors = await Supervisor.find();
   res.status(200).json({
     status: "success",
-    results: staffs.length,
+    results: supervisors.length,
     data: {
-      staffs,
+      supervisors,
     },
   });
 });
 
 exports.getSupervisor = catchAsync(async (req, res, next) => {
-  const staffs = await Staff.find();
-  const id = req.params.id * 1;
-  const staff = staffs.find((t) => t.id == id);
+  const id = req.params.id;
+  const supervisor = await Supervisor.find({ id });
 
-  if (!staff) {
-    return next(new AppError("No staff found with that id", 404));
+  if (!supervisor || supervisor.length == 0) {
+    return next(new AppError("No supervisor found with that id", 404));
   }
 
   res.status(200).json({
     status: "success",
-    results: staff.length,
     data: {
-      staff,
+      supervisor,
     },
   });
 });
 
 exports.postSupervisor = catchAsync(async (req, res) => {
-  const staffs = await Staff.find();
+  const supervisors = await Supervisor.find();
+  const { name, age, gender, category, contact } = req.body;
 
-  const staffId = staffs[staffs.length - 1].id + 5;
-  const newStaff = new Staff(Object.assign({ id: staffId }, req.body));
+  const supervisorId =
+    "SP" + (Number(supervisors[supervisors.length - 1].id.split("P")[1]) + 1);
+  const newSupervisor = new Supervisor(
+    Object.assign(
+      { id: supervisorId },
+      {
+        name,
+        age,
+        gender,
+        category,
+        contact,
+      }
+    )
+  );
 
-  await newStaff.save();
+  await newSupervisor.save();
 
   res.status(201).json({
     status: "success",
     data: {
-      newStaff,
+      newSupervisor,
     },
   });
 });
