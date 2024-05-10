@@ -4,8 +4,12 @@ import Main from "@/views/Main.vue";
 import AnalyticsPage from "@/views/AnalyticsPage.vue";
 import CreateStaffPage from "@/views/CreateStaffPage.vue";
 import CreateTaskPage from "@/views/CreateTaskPage.vue";
+import CreateFacultyPage from "@/views/CreateFacultyPage.vue";
+import CreateSupervisorPage from "@/views/CreateSupervisorPage.vue";
 import StaffsPage from "@/views/StaffsPage.vue";
 import TasksPage from "@/views/TasksPage.vue";
+import FacultyPage from "@/views/FacultyPage.vue";
+import SupervisorsPage from "@/views/SupervisorsPage.vue";
 import NotfoundPage from "@/views/NotfoundPage.vue";
 
 const router = createRouter({
@@ -49,6 +53,26 @@ const router = createRouter({
       path: "/dashboard/tasks",
       name: "tasks",
       component: TasksPage,
+    },
+    {
+      path: "/dashboard/faculty",
+      name: "faculty",
+      component: FacultyPage,
+    },
+    {
+      path: "/dashboard/supervisors",
+      name: "supervisors",
+      component: SupervisorsPage,
+    },
+    {
+      path: "/dashboard/createfaculty",
+      name: "create faculty",
+      component: CreateFacultyPage,
+    },
+    {
+      path: "/dashboard/createsupervisor",
+      name: "create supervisor",
+      component: CreateSupervisorPage,
     },
     {
       path: "/404",

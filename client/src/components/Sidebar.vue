@@ -22,36 +22,51 @@
             <span class="material-icons"> analytics </span>
             <span class="text">Analytics</span>
           </router-link>
+
           <router-link class="button" to="/dashboard/tasks">
             <span class="material-icons">task</span>
             <span class="text">Tasks</span>
           </router-link>
+
           <router-link class="button" to="/dashboard/staffs">
             <span class="material-icons">engineering</span>
             <span class="text">Staffs</span>
           </router-link>
+
+          <router-link class="button" to="/dashboard/faculty">
+            <span class="material-icons">groups</span>
+            <span class="text">Faculties</span>
+          </router-link>
+
+          <router-link class="button" to="/dashboard/supervisors">
+            <span class="material-icons">supervisor_account</span>
+            <span class="text">Supervisors</span>
+          </router-link>
+        </div>
+
+        <h3 class="text-[#818cf8] text-sm font-semibold p-5 uppercase">
+          ADMIN
+        </h3>
+        <div class="menu flex flex-col gap-1">
           <router-link class="button" to="/dashboard/createtask">
             <span class="material-icons">design_services</span>
             <span class="text">Create Task</span>
           </router-link>
+
           <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">edit_document</span>
+            <span class="material-icons">person_add</span>
             <span class="text">Create Staff</span>
           </router-link>
-          <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">edit_document</span>
-            <span class="text">Faculties</span>
-          </router-link>
-          <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">edit_document</span>
+
+          <router-link class="button" to="/dashboard/createfaculty">
+            <span class="material-icons">group_add</span>
             <span class="text">Create Faculty</span>
           </router-link>
-          <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">edit_document</span>
-            <span class="text">Supervisors</span>
-          </router-link>
-          <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">edit_document</span>
+
+          <router-link class="button" to="/dashboard/createsupervisor">
+            <span class="material-symbols-outlined">
+              deployed_code_account
+            </span>
             <span class="text">Create Supervisor</span>
           </router-link>
         </div>
@@ -100,7 +115,8 @@ aside {
   border-radius: 6px;
 }
 
-.material-icons {
+.material-icons,
+.material-symbols-outlined {
   opacity: 0.5;
 }
 
@@ -115,6 +131,7 @@ aside {
 }
 
 .button:hover .material-icons,
+.button:hover .material-symbols-outlined,
 .button:hover .text {
   opacity: 1;
 }
@@ -124,7 +141,8 @@ aside {
 }
 
 .router-link-exact-active .text,
-.router-link-exact-active .material-icons {
+.router-link-exact-active .material-icons,
+.router-link-exact-active .material-symbols-outlined {
   opacity: 1;
 }
 
@@ -147,7 +165,8 @@ h3,
   display: inline-block;
 }
 
-.open .material-icons {
+.open .material-icons,
+.material-symbols-outlined {
   margin-right: 16px;
 }
 
@@ -165,7 +184,8 @@ h3,
   gap: 1rem;
 }
 
-.material-icons {
+.material-icons,
+.material-symbols-outlined {
   transition: 200ms ease-in-out;
 }
 
@@ -174,9 +194,5 @@ h3,
     position: fixed;
     z-index: 100;
   }
-}
-.material-symbols-outlined {
-  color: rgb(148, 163, 184);
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 </style>
