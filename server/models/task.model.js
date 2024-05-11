@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 
 const formatDate = (date) => {
   var date = date.split("/");
-  if (date[0] < 10) {
-    var day = "0" + date[0];
-  }
-  if (date[1] < 10) {
-    var month = "0" + date[1];
-  }
+  var day, month;
+  if (date[0] < 10) day = "0" + date[0];
+  else day = date[0];
+  if (date[1] < 10) month = "0" + date[1];
+  else month = date[1];
   return [day, month, date[2]].join("/");
 };
 

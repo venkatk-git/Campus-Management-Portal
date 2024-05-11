@@ -2,98 +2,126 @@
   <div class="form-card">
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
-        <div class="py-6 flex items-center w-full">
-          <span class="px-10 w-1/5"
+        <div class="py-5 flex w-full">
+          <span class="px-10 w-1/5 pt-3"
             >Name<span class="text-red-500"> *</span></span
           >
-          <InputText
-            v-model="name"
-            type="text"
-            placeholder="Name"
-            class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputText
+              v-model="name"
+              :invalid="validationErrors.name.value"
+              type="text"
+              placeholder="Name"
+              class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
+            />
+            <small v-if="validationErrors.name.value" class="text-red-500"
+              >A staff must have a name</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3"
             >Age<span class="text-red-500"> *</span></span
           >
-          <InputNumber
-            v-model="age"
-            :pt:root:class="'flex'"
-            inputId="minmax-buttons"
-            mode="decimal"
-            showButtons
-            :min="18"
-            :max="100"
-            class="w-[15rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputNumber
+              v-model="age"
+              :invalid="validationErrors.age.value"
+              :pt:root:class="'flex'"
+              inputId="minmax-buttons"
+              mode="decimal"
+              showButtons
+              :min="18"
+              :max="100"
+              class="w-[15rem]"
+            />
+            <small v-if="validationErrors.age.value" class="text-red-500"
+              >A staff must have a name</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
           <span class="px-10 w-1/5"
             >Gender<span class="text-red-500"> *</span></span
           >
-          <Dropdown
-            v-model="gender"
-            :options="genders"
-            placeholder="Select Gender"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+          <div class="flex flex-col gap-3">
+            <Dropdown
+              v-model="gender"
+              :invalid="validationErrors.gender.value"
+              :options="genders"
+              placeholder="Select Gender"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+            <small v-if="validationErrors.gender.value" class="text-red-500"
+              >A staff must have a name</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3"
             >Category<span class="text-red-500"> *</span></span
           >
-          <Dropdown
-            v-model="category"
-            :options="categorys"
-            placeholder="Select Category"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+          <div class="flex flex-col gap-3">
+            <Dropdown
+              v-model="category"
+              :invalid="validationErrors.category.value"
+              :options="categorys"
+              placeholder="Select Category"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+            <small v-if="validationErrors.category.value" class="text-red-500"
+              >A staff must have a name</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5">Location</span>
-          <Dropdown
-            v-model="location"
-            :options="locations"
-            placeholder="Select Location  "
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3">Location</span>
+          <div class="flex flex-col gap-3">
+            <Dropdown
+              v-model="location"
+              :options="locations"
+              placeholder="Select Location  "
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
+        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
           <span class="px-10 w-1/5"
             >Contact Number<span class="text-red-500"> *</span></span
           >
-          <InputMask
-            id="phone"
-            v-model="contact"
-            mask="9999999999"
-            placeholder="9999999999"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputMask
+              id="phone"
+              v-model="contact"
+              mask="9999999999"
+              placeholder="9999999999"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+            />
+          </div>
         </div>
       </div>
     </form>
@@ -128,6 +156,7 @@ import { ref } from "vue";
 import axios from "axios";
 import api from "@/api/api";
 import router from "@/router";
+import staffFormValidate from "./functions/staffFromValidation";
 
 const name = ref();
 const age = ref(18);
@@ -151,6 +180,36 @@ const locations = ref([
   "Location E",
 ]);
 
+const validationErrors = {
+  name: ref(false),
+  age: ref(false),
+  gender: ref(false),
+  category: ref(false),
+  contact: ref(false),
+};
+
+const validateForm = () => {
+  const errorNote = staffFormValidate(name, age, gender, category, contact);
+  let flag = 0;
+  for (let i = 0; i < errorNote.length; i++) {
+    if (errorNote[i] == "name") validationErrors.name.value = true;
+    if (errorNote[i] == "age") validationErrors.age.value = true;
+    if (errorNote[i] == "gender") validationErrors.gender.value = true;
+    if (errorNote[i] == "category") validationErrors.category.value = true;
+    if (errorNote[i] == "contact") validationErrors.contact.value = true;
+
+    if (
+      errorNote[i] == "name" ||
+      errorNote[i] == "age" ||
+      errorNote[i] == "gender" ||
+      errorNote[i] == "category" ||
+      errorNote[i] == "contact"
+    )
+      flag = 1;
+  }
+  return flag;
+};
+
 const handleCreateAndAnother = async () => {
   const obj = {
     name: name.value,
@@ -161,21 +220,23 @@ const handleCreateAndAnother = async () => {
     contact: contact.value,
   };
 
-  try {
-    await axios.post(`${api}/staffs`, JSON.stringify(obj), {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    name.value = "";
-    age.value = 18;
-    gender.value = "";
-    category.value = "";
-    location.value = "";
-    contact.value = undefined;
-  } catch (error) {
-    console.log(error.message);
+  if (!validateForm()) {
+    try {
+      await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      name.value = "";
+      age.value = 18;
+      gender.value = "";
+      category.value = "";
+      location.value = "";
+      contact.value = undefined;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 

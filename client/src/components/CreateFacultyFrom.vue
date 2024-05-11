@@ -111,6 +111,8 @@ const details = ref();
 const contact = ref();
 const genders = ref(["Male", "Female"]);
 
+const validateForm = () => {};
+
 const handleCreateAndAnother = async () => {
   const obj = {
     name: name.value,
