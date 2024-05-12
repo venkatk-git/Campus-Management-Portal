@@ -2,7 +2,7 @@ export default {
   root: ({ context, props }) => ({
     class: [
       // Font
-      "font-sans leading-none",
+      "font-normal leading-none",
 
       // Spacing
       "m-0 p-3",
@@ -16,7 +16,7 @@ export default {
       { "border-surface-300 dark:border-surface-600": !props.invalid },
 
       // Invalid State
-      { "border-red-500 dark:border-red-400": props.invalid },
+      { "border-red-500 dark:border-red-500": props.invalid },
 
       // States
       {

@@ -31,7 +31,7 @@ export default {
         "flex flex-auto border-[#ffffff4e] bg-[#1c2738]",
 
         // Font
-        "font-sans leading-none",
+        "font-normal leading-none",
 
         //Text
         {
@@ -75,7 +75,7 @@ export default {
         { "border-surface-300 dark:border-surface-600": !parent.props.invalid },
 
         // Invalid State
-        { "border-red-500 dark:border-red-400": parent.props.invalid },
+        { "border-red-500 dark:border-red-500": parent.props.invalid },
 
         // States
         {
@@ -135,6 +135,7 @@ export default {
         "text-white dark:text-surface-900",
         "bg-primary-500 dark:bg-primary-400",
         "border border-primary-500 dark:border-primary-400",
+        { "border-red-500 dark:border-red-500": parent.props.invalid },
 
         // Sizing
         "w-[3rem]",
@@ -206,6 +207,7 @@ export default {
         "text-white dark:text-surface-900",
         "bg-primary-500 dark:bg-primary-400",
         "border border-primary-500 dark:border-primary-400",
+        { "border-red-500 dark:border-red-500": parent.props.invalid },
 
         // Sizing
         "w-[3rem]",

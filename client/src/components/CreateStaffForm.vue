@@ -2,6 +2,7 @@
   <div class="form-card">
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
+        <!-- Name -->
         <div class="py-5 flex w-full">
           <span class="px-10 w-1/5 pt-3"
             >Name<span class="text-red-500"> *</span></span
@@ -19,6 +20,7 @@
             >
           </div>
         </div>
+        <!-- Age -->
         <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
           <span class="px-10 w-1/5 pt-3"
             >Age<span class="text-red-500"> *</span></span
@@ -36,12 +38,13 @@
               class="w-[15rem]"
             />
             <small v-if="validationErrors.age.value" class="text-red-500"
-              >A staff must have a name</small
+              >A staff must have a age</small
             >
           </div>
         </div>
+        <!-- Gender -->
         <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+          <span class="px-10 w-1/5 pt-2"
             >Gender<span class="text-red-500"> *</span></span
           >
           <div class="flex flex-col gap-3">
@@ -61,12 +64,13 @@
               </template>
             </Dropdown>
             <small v-if="validationErrors.gender.value" class="text-red-500"
-              >A staff must have a name</small
+              >A staff must have a gender</small
             >
           </div>
         </div>
+        <!-- Category -->
         <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+          <span class="px-10 w-1/5 pt-2"
             >Category<span class="text-red-500"> *</span></span
           >
           <div class="flex flex-col gap-3">
@@ -86,12 +90,13 @@
               </template>
             </Dropdown>
             <small v-if="validationErrors.category.value" class="text-red-500"
-              >A staff must have a name</small
+              >A staff must have a category</small
             >
           </div>
         </div>
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3">Location</span>
+        <!-- Location -->
+        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5">Location</span>
           <div class="flex flex-col gap-3">
             <Dropdown
               v-model="location"
@@ -109,22 +114,28 @@
             </Dropdown>
           </div>
         </div>
-        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <!-- Contact -->
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3"
             >Contact Number<span class="text-red-500"> *</span></span
           >
           <div class="flex flex-col gap-3">
             <InputMask
               id="phone"
               v-model="contact"
+              :invalid="validationErrors.contact.value"
               mask="9999999999"
-              placeholder="9999999999"
+              placeholder="Phone number"
               class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
             />
+            <small v-if="validationErrors.contact.value" class="text-red-500"
+              >A staff must have a contact number</small
+            >
           </div>
         </div>
       </div>
     </form>
+    <!-- Buttons -->
     <div class="flex w-full justify-end">
       <div class="flex items-center my-7 gap-4">
         <div>
@@ -156,7 +167,7 @@ import { ref } from "vue";
 import axios from "axios";
 import api from "@/api/api";
 import router from "@/router";
-import staffFormValidate from "./functions/staffFromValidation";
+import staffFormValidate from "./functions/staffFormValidation";
 
 const name = ref();
 const age = ref(18);
@@ -249,14 +260,19 @@ const handleCreate = async () => {
     location: location.value,
     contact: contact.value,
   };
-  console.log(obj);
-  await axios.post(`${api}/staffs`, JSON.stringify(obj), {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-  router.push("/dashboard/staffs");
+  if (!validateForm()) {
+    try {
+      await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      router.push("/dashboard/staffs");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 };
 </script>
 

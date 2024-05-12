@@ -1,82 +1,118 @@
 <template>
   <div class="form-card">
+    <Toast />
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
-        <div class="py-6 flex items-center w-full">
-          <span class="px-10 w-1/5"
+        <!-- Name -->
+        <div class="py-5 flex w-full">
+          <span class="px-10 w-1/5 pt-3"
             >Name<span class="text-red-500"> *</span></span
           >
-          <InputText
-            v-model="name"
-            type="text"
-            placeholder="Name"
-            class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputText
+              v-model="name"
+              :invalid="validationErrors.name.value"
+              type="text"
+              placeholder="Name"
+              class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
+            />
+            <small v-if="validationErrors.name.value" class="text-red-500"
+              >A supervisor must have a name</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <!-- Age -->
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3"
             >Age<span class="text-red-500"> *</span></span
           >
-          <InputNumber
-            v-model="age"
-            :pt:root:class="'flex'"
-            inputId="minmax-buttons"
-            mode="decimal"
-            showButtons
-            :min="18"
-            :max="100"
-            class="w-[15rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputNumber
+              v-model="age"
+              :pt:root:class="'flex'"
+              :invalid="validationErrors.age.value"
+              inputId="minmax-buttons"
+              mode="decimal"
+              showButtons
+              :min="18"
+              :max="100"
+              class="w-[15rem]"
+            />
+          </div>
+          <small v-if="validationErrors.age.value" class="text-red-500"
+            >A supervisor must have a age</small
+          >
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <!-- Gender -->
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-2"
             >Gender<span class="text-red-500"> *</span></span
           >
-          <Dropdown
-            v-model="gender"
-            :options="genders"
-            placeholder="Select Gender"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+          <div class="flex flex-col gap-3">
+            <Dropdown
+              v-model="gender"
+              :options="genders"
+              :invalid="validationErrors.gender.value"
+              placeholder="Select Gender"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+            <small v-if="validationErrors.gender.value" class="text-red-500"
+              >A supervisor must have a age</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <!-- Category -->
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-2"
             >Category<span class="text-red-500"> *</span></span
           >
-          <Dropdown
-            v-model="category"
-            :options="categorys"
-            placeholder="Select Category"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+          <div class="flex flex-col gap-3">
+            <Dropdown
+              v-model="category"
+              :options="categorys"
+              :invalid="validationErrors.category.value"
+              placeholder="Select Category"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+            <small v-if="validationErrors.category.value" class="text-red-500"
+              >A supervisor must have a category</small
+            >
+          </div>
         </div>
-        <div class="py-6 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5"
+        <!-- Contact -->
+        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
+          <span class="px-10 w-1/5 pt-3"
             >Contact Number<span class="text-red-500"> *</span></span
           >
-          <InputMask
-            id="phone"
-            v-model="contact"
-            mask="9999999999"
-            placeholder="9999999999"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-          />
+          <div class="flex flex-col gap-3">
+            <InputMask
+              id="phone"
+              v-model="contact"
+              :invalid="validationErrors.contact.value"
+              mask="9999999999"
+              placeholder="Phone number"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+            />
+            <small v-if="validationErrors.contact.value" class="text-red-500"
+              >A supervisor must have a contact</small
+            >
+          </div>
         </div>
       </div>
     </form>
@@ -108,9 +144,13 @@
 
 <script setup>
 import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
 import axios from "axios";
 import api from "@/api/api";
 import router from "@/router";
+import supervisorFormValidate from "./functions/supervisorFormValidation";
+
+const toast = useToast();
 
 const name = ref();
 const age = ref(18);
@@ -127,7 +167,54 @@ const categorys = ref([
   "Category E",
 ]);
 
+const validationErrors = {
+  name: ref(false),
+  age: ref(false),
+  gender: ref(false),
+  category: ref(false),
+  contact: ref(false),
+};
+
+const validateForm = () => {
+  const errorNote = supervisorFormValidate(
+    name,
+    age,
+    gender,
+    category,
+    contact
+  );
+  let flag = 0;
+  for (let i = 0; i < errorNote.length; i++) {
+    if (errorNote[i] == "name") validationErrors.name.value = true;
+    if (errorNote[i] == "age") validationErrors.age.value = true;
+    if (errorNote[i] == "gender") validationErrors.gender.value = true;
+    if (errorNote[i] == "category") validationErrors.category.value = true;
+    if (errorNote[i] == "contact") validationErrors.contact.value = true;
+
+    if (
+      errorNote[i] == "name" ||
+      errorNote[i] == "age" ||
+      errorNote[i] == "gender" ||
+      errorNote[i] == "category" ||
+      errorNote[i] == "contact"
+    )
+      flag = 1;
+  }
+  return flag;
+};
+
+const showError = () => {
+  toast.add({
+    severity: "error",
+    summary: "Failed to create supervisor",
+    detail: "Please fill out the required fields",
+    life: 3000,
+  });
+};
+
 const handleCreateAndAnother = async () => {
+  if (validateForm()) return showError();
+
   const obj = {
     name: name.value,
     age: age.value,
@@ -154,6 +241,8 @@ const handleCreateAndAnother = async () => {
 };
 
 const handleCreate = async () => {
+  if (validateForm()) return showError();
+
   const obj = {
     name: name.value,
     age: age.value,
@@ -161,14 +250,18 @@ const handleCreate = async () => {
     category: category.value,
     contact: contact.value,
   };
-  console.log(obj);
-  await axios.post(`${api}/supervisors`, JSON.stringify(obj), {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-  router.push("/dashboard/supervisors");
+
+  try {
+    await axios.post(`${api}/supervisors`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    router.push("/dashboard/supervisors");
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 </script>
 
