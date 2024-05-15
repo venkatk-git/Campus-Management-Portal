@@ -4,10 +4,11 @@
       <h3 class="text-xl">Supervisors</h3>
       <Button
         v-ripple
-        :pt:root:class="'flex justify-center gap-3 p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
+        :pt:root:class="'flex justify-center gap-3 p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5] max-w-max'"
         @click="navigate()"
-        ><span class="material-symbols-outlined"> edit </span>Create
-        Supervisor</Button
+        ><span class="material-symbols-outlined"> edit </span
+        ><span class="lg-create">Create Supervisor</span
+        ><span class="sm-create hidden">Create</span></Button
       >
     </div>
     <Supervisor />
@@ -22,4 +23,14 @@ const navigate = () => {
 };
 </script>
 
-<style></style>
+<style>
+@media (max-width: 420px) {
+  .lg-create {
+    display: none;
+  }
+
+  .sm-create {
+    display: inline-block;
+  }
+}
+</style>

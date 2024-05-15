@@ -21,7 +21,7 @@
         ]"
       >
         <template #header>
-          <div class="flex justify-end border-none">
+          <div class="flex justify-end border-none header-container">
             <span class="relative">
               <div class="input-field">
                 <span
@@ -32,7 +32,7 @@
                 <InputText
                   v-model="filters['global'].value"
                   placeholder="Search Faculty"
-                  class="pl-[3rem] font-normal bg-transparent border-[#ffffff4e]"
+                  class="pl-[3rem] font-normal bg-transparent border-[#ffffff4e] global-search"
                 />
               </div>
             </span>

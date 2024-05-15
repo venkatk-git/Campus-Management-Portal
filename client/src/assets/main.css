@@ -8,3 +8,11 @@ a {
   text-decoration: none;
 }
 
+@media (max-width: 600px) {
+  .global-search {
+    width: 13rem;
+  }
+  .header-container {
+    justify-content: flex-start;
+  }
+}

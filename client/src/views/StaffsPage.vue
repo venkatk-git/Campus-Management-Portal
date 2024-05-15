@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-10 w-full">
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center w-full">
       <h3 class="text-xl">Staffs</h3>
       <Button
         v-ripple

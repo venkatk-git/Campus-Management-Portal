@@ -19,7 +19,7 @@
         </div>
         <div>
           <span
-            class="material-symbols-rounded font-bold lg:hidden md:hidden"
+            class="material-symbols-rounded font-bold lg:hidden"
             @click="ToggleMenu()"
           >
             close
@@ -110,7 +110,7 @@ const isOpen = ref(localStorage.getItem("isOpen"));
 <style scoped>
 aside {
   visibility: hidden;
-  margin-left: -95px;
+  margin-left: -96px;
   transition: 0.2s ease-in-out;
   border-right: 0.8px solid #f1f5f91f;
 }
@@ -208,7 +208,7 @@ h3,
   transition: 200ms ease-in-out;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   aside {
     position: fixed;
     z-index: 100;

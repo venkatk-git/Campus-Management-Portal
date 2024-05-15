@@ -1,18 +1,14 @@
 <template>
-  <div class="flex min-h-screen">
+  <div class="flex min-h-screen w-full">
     <SideBar
       v-if="route.path != '/' && route.path != '/login' && route.path != '/404'"
     />
-    <div class="flex flex-col items-center min-w-[85%] max-w-[100%]">
+    <div class="flex flex-col items-center min-w-[85%] max-w-[100%] w-full">
       <Navbar
         v-if="
           route.path != '/' && route.path != '/login' && route.path != '/404'
         "
       />
-      <!-- <Breadcrumb
-        :model="pages"
-        class="self-start border-none px-[3.5rem] mb-4"
-      /> -->
       <div
         class="flex flex-auto justify-center items-center min-w-[60%]: max-w-[85%]"
       >
