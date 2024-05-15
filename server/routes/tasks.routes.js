@@ -14,6 +14,13 @@ router
     authController.restrictTo("supervisor", "admin"),
     tasksController.postTask
   );
-router.route("/:id").get(authController.protect, tasksController.getTask);
+router
+  .route("/:id")
+  .get(authController.protect, tasksController.getTask)
+  .patch(
+    authController.protect,
+    authController.restrictTo("supervisor", "admin"),
+    tasksController.updateTask
+  );
 
 module.exports = router;

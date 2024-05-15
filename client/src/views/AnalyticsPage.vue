@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="flex flex-col gap-10 items-center w-full self-start">
-      <div class="card flex flex-col gap-10">
-        <h3 class="text-xl">Analytics</h3>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div class="card flex flex-col gap-10 w-full">
+        <h3 class="text-xl max-w-full">Analytics</h3>
+        <div
+          class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 category-card-grid w-full"
+        >
           <CategoryTaskCard completed="31" tasks="31" category="Category A" />
           <CategoryTaskCard completed="28" tasks="42" category="Category B" />
           <CategoryTaskCard completed="3" tasks="7" category="Category C" />
@@ -14,7 +16,7 @@
           <CategoryTaskCard completed="5" tasks="8" category="Category H" />
         </div>
         <div
-          class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-10"
+          class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between md:gap-x-10 lg:gap-x-[5rem] gap-y-10 mb-10"
         >
           <ChartCard
             block="Block A"
@@ -70,4 +72,10 @@ import ChartCard from "../components/ChartCard.vue";
 import Navbar from "../components/Navbar.vue";
 </script>
 
-<style></style>
+<style scoped>
+@media (min-width: 1640px) {
+  .category-card-grid {
+    width: 100%;
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-6 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden min:w-fit"
+    class="flex flex-col gap-6 flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden max-w-[50rem] sm:w-full"
   >
     <div class="flex items-start justify-between">
       <span

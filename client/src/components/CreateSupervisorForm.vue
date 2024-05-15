@@ -203,17 +203,22 @@ const validateForm = () => {
   return flag;
 };
 
-const showError = () => {
+const showToast = (severity, summary, detail) => {
   toast.add({
-    severity: "error",
-    summary: "Failed to create supervisor",
-    detail: "Please fill out the required fields",
-    life: 3000,
+    severity: severity,
+    summary: summary,
+    detail: detail,
+    life: 10000,
   });
 };
 
 const handleCreateAndAnother = async () => {
-  if (validateForm()) return showError();
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
 
   const obj = {
     name: name.value,
@@ -235,13 +240,19 @@ const handleCreateAndAnother = async () => {
     gender.value = "";
     category.value = "";
     contact.value = undefined;
+    showToast("success", "Form submitted", "Supervisor successfully created");
   } catch (error) {
-    console.log(error.message);
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 
 const handleCreate = async () => {
-  if (validateForm()) return showError();
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
 
   const obj = {
     name: name.value,
@@ -258,9 +269,10 @@ const handleCreate = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    showToast("success", "Form submitted", "Supervisor successfully created");
     router.push("/dashboard/supervisors");
   } catch (error) {
-    console.log(error.message);
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 </script>

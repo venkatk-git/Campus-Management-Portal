@@ -109,7 +109,7 @@ import Lara from "./presets/lara";
 import appState from "./presets/lara/accordion/plugins/appState";
 import Ripple from "primevue/ripple";
 
-app.use(PrimeVue, { ripple: true, unstyled: true, pt: Lara });
+app.use(PrimeVue, { ripple: true, pt: Lara });
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);

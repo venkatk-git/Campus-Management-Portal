@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nav-bar flex pt-4 pb-2 mb-8 px-[3.5rem] justify-between w-full border-b-[0.8px] border-[#f1f5f91f]"
+    class="nav-bar flex pt-4 pb-2 mb-8 min-[320px]:px-8 lg:px-[3.5rem] justify-between w-full border-b-[0.8px] border-[#f1f5f91f]"
   >
     <div class="self-start mt-2 p-0">
       <span class="material-symbols-rounded cursor-pointer" @click="ToggleMenu">

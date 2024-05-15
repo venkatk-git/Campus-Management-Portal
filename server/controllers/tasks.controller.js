@@ -55,8 +55,6 @@ exports.postTask = catchAsync(async (req, res) => {
     });
   }
 
-  // const user = await User.findOne({ email: decoded.email });
-
   const newTask = new Task(
     Object.assign({ id: taskId, supervisor_id: "SP003" }, req.body)
   );
@@ -66,5 +64,24 @@ exports.postTask = catchAsync(async (req, res) => {
   res.status(201).json({
     status: "success",
     data: newTask,
+  });
+});
+
+exports.updateTask = catchAsync(async (req, res, next) => {
+  const id = req.params.id * 1;
+  const task = await Task.findOne({ id });
+
+  if (!task) {
+    return next(new AppError("Task not found with that id", 404));
+  }
+
+  await Task.updateOne(
+    { id },
+    { status: req.body.status, remarks: req.body.remarks }
+  );
+
+  res.status(202).json({
+    status: "success",
+    data: task,
   });
 });

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="chart-card flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6 lg:w-[38rem] md:w-[25rem] sm:w-80"
+    class="chart-card flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-6 lg:max-w-[40rem] md:max-w-[32rem] sm:max-w-full"
   >
     <div class="flex flex-col flex-auto h-44">
       <ChartComponent

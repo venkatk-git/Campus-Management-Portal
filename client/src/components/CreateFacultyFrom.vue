@@ -1,5 +1,6 @@
 <template>
   <div class="form-card">
+    <Toast />
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
@@ -137,10 +138,13 @@
 
 <script setup>
 import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
 import axios from "axios";
 import api from "@/api/api";
 import router from "@/router";
 import facultyFormValidate from "./functions/facultyFormValidation";
+
+const toast = useToast();
 
 const name = ref();
 const age = ref(18);
@@ -179,7 +183,22 @@ const validateForm = () => {
   return flag;
 };
 
+const showToast = (severity, summary, detail) => {
+  toast.add({
+    severity: severity,
+    summary: summary,
+    detail: detail,
+    life: 10000,
+  });
+};
+
 const handleCreateAndAnother = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
   const obj = {
     name: name.value,
     age: age.value,
@@ -188,26 +207,32 @@ const handleCreateAndAnother = async () => {
     contact: contact.value,
   };
 
-  if (!validateForm()) {
-    try {
-      await axios.post(`${api}/faculty`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      name.value = "";
-      age.value = 18;
-      gender.value = "";
-      details.value = "";
-      contact.value = undefined;
-    } catch (error) {
-      console.log(error.message);
-    }
+  try {
+    await axios.post(`${api}/faculty`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    showToast("success", "Form submitted", "Faculty successfully created");
+
+    name.value = "";
+    age.value = 18;
+    gender.value = "";
+    details.value = "";
+    contact.value = undefined;
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 
 const handleCreate = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
   const obj = {
     name: name.value,
     age: age.value,
@@ -215,23 +240,23 @@ const handleCreate = async () => {
     details: details.value,
     contact: contact.value,
   };
-  if (!validateForm()) {
-    try {
-      await axios.post(`${api}/faculty`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      name.value = "";
-      age.value = 18;
-      gender.value = "";
-      details.value = "";
-      contact.value = undefined;
-      router.push("/dashboard/faculty");
-    } catch (error) {
-      console.log(error.message);
-    }
+  try {
+    await axios.post(`${api}/faculty`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    name.value = "";
+    age.value = 18;
+    gender.value = "";
+    details.value = "";
+    contact.value = undefined;
+    showToast("success", "Form submitted", "Faculty successfully created");
+
+    router.push("/dashboard/faculty");
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 </script>

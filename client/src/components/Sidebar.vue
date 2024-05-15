@@ -1,14 +1,29 @@
 <template>
   <aside
-    class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4 open"
+    class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4"
     id="aside"
   >
-    <div class="flex" :class="`${isOpen ? 'expanded px-4' : 'not-expanded'}`">
-      <div class="profile transition duration-200 ease-in-out">
+    <div
+      class="flex"
+      :class="`${
+        isOpen ? 'expanded lg:px-4 md:px-4 sm:pr-0 sm:pl-4' : 'not-expanded'
+      }`"
+    >
+      <div
+        class="profile transition duration-200 ease-in-out flex items-center justify-between w-full"
+      >
         <div
           class="flex justify-center transition duration-200 ease-in-out py-4"
         >
           <Logo size="32px" />
+        </div>
+        <div>
+          <span
+            class="material-symbols-rounded font-bold lg:hidden md:hidden"
+            @click="ToggleMenu()"
+          >
+            close
+          </span>
         </div>
       </div>
     </div>
@@ -85,6 +100,10 @@
 import { ref } from "vue";
 import Logo from "./Logo.vue";
 
+function ToggleMenu() {
+  document.getElementById("aside").classList.toggle("open");
+}
+
 const isOpen = ref(localStorage.getItem("isOpen"));
 </script>
 
@@ -99,7 +118,7 @@ aside {
 .open {
   visibility: visible;
   margin-left: 0;
-  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
 }
 
 .menu-toggle-wrapper {

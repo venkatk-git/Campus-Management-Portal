@@ -1,5 +1,7 @@
 <template>
   <div class="form-card">
+    <Toast />
+
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
@@ -164,10 +166,14 @@
 
 <script setup>
 import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
+
 import axios from "axios";
 import api from "@/api/api";
 import router from "@/router";
 import staffFormValidate from "./functions/staffFormValidation";
+
+const toast = useToast();
 
 const name = ref();
 const age = ref(18);
@@ -221,7 +227,23 @@ const validateForm = () => {
   return flag;
 };
 
+const showToast = (severity, summary, detail) => {
+  toast.add({
+    severity: severity,
+    summary: summary,
+    detail: detail,
+    life: 10000,
+  });
+};
+
 const handleCreateAndAnother = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
+
   const obj = {
     name: name.value,
     age: age.value,
@@ -231,27 +253,33 @@ const handleCreateAndAnother = async () => {
     contact: contact.value,
   };
 
-  if (!validateForm()) {
-    try {
-      await axios.post(`${api}/staffs`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      name.value = "";
-      age.value = 18;
-      gender.value = "";
-      category.value = "";
-      location.value = "";
-      contact.value = undefined;
-    } catch (error) {
-      console.log(error.message);
-    }
+  try {
+    await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    showToast("success", "Form submitted", "Staff successfully created");
+    name.value = "";
+    age.value = 18;
+    gender.value = "";
+    category.value = "";
+    location.value = "";
+    contact.value = undefined;
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 
 const handleCreate = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
+
   const obj = {
     name: name.value,
     age: age.value,
@@ -260,18 +288,18 @@ const handleCreate = async () => {
     location: location.value,
     contact: contact.value,
   };
-  if (!validateForm()) {
-    try {
-      await axios.post(`${api}/staffs`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      router.push("/dashboard/staffs");
-    } catch (error) {
-      console.log(error.message);
-    }
+  try {
+    await axios.post(`${api}/staffs`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    showToast("success", "Form submitted", "Staff successfully created");
+
+    router.push("/dashboard/staffs");
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 </script>

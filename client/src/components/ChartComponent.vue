@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col items-center">
+  <div class="max-w-full flex flex-col items-center">
     <h3 v-text="block" class="self-start"></h3>
     <div class="w-40 h-40">
       <canvas :id="block"></canvas>

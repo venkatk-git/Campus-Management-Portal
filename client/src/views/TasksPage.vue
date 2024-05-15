@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col gap-7 w-full">
-    <div class="flex justify-between">
+  <div class="flex flex-col items-center gap-7 w-full min-px-10">
+    <div class="flex justify-between w-full">
       <h3 class="text-xl">Tasks</h3>
       <Button
         v-ripple
@@ -10,7 +10,10 @@
         Task</Button
       >
     </div>
-    <Tasks />
+    <!-- <div class="w-full max-w-[95rem]"> -->
+    <div class="max-w-full">
+      <Tasks />
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,66 @@
 <template>
   <div
-    class="table-card flex mb-10 py-5 rounded-xl shadow bg-[rgba(30,41,59,1)] max-w-screen-xl"
+    class="table-card flex mb-10 py-5 rounded-xl shadow bg-[rgba(30,41,59,1)] max-w-full"
   >
+    <Toast />
+    <!-- Dialog box  -->
+    <Dialog
+      v-model:visible="visible"
+      modal
+      class="bg-[rgba(30,41,59,1)] border-none"
+      header="Update details"
+      :style="{ width: '25rem' }"
+    >
+      <span
+        class="text-surface-600 dark:text-surface-0/70 block mb-5"
+        v-text="updateTaskName"
+      ></span>
+      <div class="flex items-center gap-3 mb-3">
+        <label for="status" class="font-semibold w-[6rem]">Status</label>
+        <Dropdown
+          id="status"
+          v-model="updateStatus"
+          :options="statuses"
+          placeholder="Select Status"
+          class="p-column-filter w-[14rem]"
+          style="min-width: 6rem"
+          :showClear="true"
+        >
+          <template #option="slotProps">
+            <div class="flex items-center gap-2">
+              <span>{{ slotProps.option }}</span>
+            </div>
+          </template>
+        </Dropdown>
+      </div>
+      <div class="flex items-center gap-3 mb-2">
+        <label for="remarks" class="font-semibold w-[6rem]">Remarks</label>
+        <Textarea
+          v-model="updateRemarks"
+          rows="5"
+          cols="60"
+          class="border-[#ffffff4e] w-[14rem]"
+        />
+      </div>
+      <template #footer>
+        <Button
+          label="Cancel"
+          text
+          @click="visible = false"
+          autofocus
+          :pt:root:class="'flex justify-center gap-3 p-ripple px-4 py-2 rounded-lg border-2 border-[#9ca3af] '"
+        />
+        <Button
+          label="Save"
+          outlined
+          @click="handleUpdateSave()"
+          :pt:root:class="'flex justify-center gap-3 p-ripple px-4 py-2 rounded-lg border-2 border-[#4F46E5] bg-[#4F46E5]'"
+          autofocus
+        />
+      </template>
+    </Dialog>
     <div class="card w-full py-4 px-10">
+      <!-- Table -->
       <DataTable
         v-model:filters="filters"
         :value="tasks"
@@ -173,6 +231,7 @@
             />
           </template>
         </Column>
+        <!-- Status -->
         <Column
           field="status"
           header="Status"
@@ -181,6 +240,10 @@
           style="min-width: 12rem"
         >
           <template #body="{ data }">
+            <!-- v-if="
+              localStorage.getItem('role') != 'admin' ||
+              localStorage.getItem('role') != 'supervisor'
+            " -->
             <Tag :value="data.status" :severity="getSeverity(data.status)" />
           </template>
           <template #filter="{ filterModel, filterCallback }">
@@ -202,6 +265,7 @@
             </Dropdown>
           </template>
         </Column>
+        <!-- Remarks -->
         <Column header="Remarks" filterField="remarks" style="min-width: 12rem">
           <template #body="{ data }">
             <span>{{ data.remarks }}</span>
@@ -216,6 +280,16 @@
             />
           </template>
         </Column>
+        <!-- Edit -->
+        <Column header="Update" style="min-width: 6rem">
+          <template #body="{ data }">
+            <Button
+              @click="handleEdit(data.id, data.name)"
+              :pt:root:class="'flex justify-center gap-3 p-ripple px-2 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
+              ><span class="material-symbols-outlined"> edit </span></Button
+            >
+          </template>
+        </Column>
       </DataTable>
     </div>
   </div>
@@ -224,11 +298,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { FilterMatchMode } from "primevue/api";
-import data from "@/components/service/SampleData";
+import { useToast } from "primevue/usetoast";
 import axios from "axios";
 import api from "@/api/api";
+
+const toast = useToast();
+
 const tasks = ref();
 const date = ref();
+const visible = ref(false);
 const filters = ref({
   global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -245,25 +323,63 @@ const category = ref(["Category A", "Category B", "Category C"]);
 const statuses = ref(["Completed", "Pending", "Ongoing"]);
 const locations = ref(["Block A", "Block B", "Block C"]);
 const loading = ref(true);
-// const userType = ref(localstorage.getItem("user"));
 
 let fetchedData;
 
 onMounted(async () => {
-  // data.getTasks().then(async (data) => {
-  // });
   fetchedData = await axios.get(`${api}/tasks`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
-  // console.log(fetchedData.data.data.tasks);
-  // tasks.value = data;
-  // console.log(data);
   tasks.value = fetchedData.data.data.tasks;
-  console.log(tasks.value);
   loading.value = false;
 });
+
+const showToast = (severity, summary, detail) => {
+  toast.add({
+    severity: severity,
+    summary: summary,
+    detail: detail,
+    life: 3000,
+  });
+};
+
+let updateTaskId;
+let updateTaskName = "Update Information";
+const updateStatus = ref("Ongoing");
+const updateRemarks = ref("");
+
+const handleEdit = async (id, name) => {
+  visible.value = true;
+  updateTaskId = id;
+  updateTaskName = name;
+};
+
+const handleUpdateSave = async () => {
+  visible.value = false;
+  const obj = {
+    status: updateStatus.value,
+    remarks: updateRemarks.value,
+  };
+
+  try {
+    await axios.patch(`${api}/tasks/${updateTaskId}`, obj, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    fetchedData = await axios.get(`${api}/tasks`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    tasks.value = fetchedData.data.data.tasks;
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
+  }
+};
 
 const getSeverity = (status) => {
   switch (status) {

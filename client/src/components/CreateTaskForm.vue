@@ -1,5 +1,7 @@
 <template>
   <div class="form-card">
+    <Toast />
+
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
@@ -228,11 +230,15 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
+import router from "@/router";
 import Button from "primevue/button";
 import axios from "axios";
 import api from "@/api/api";
 import tasksFormValidate from "./functions/tasksFormValidate";
+
+const toast = useToast();
 
 const formatDate = (date) => {
   var date = date.split("/");
@@ -308,7 +314,23 @@ const validateForm = () => {
   return flag;
 };
 
+const showToast = (severity, summary, detail) => {
+  toast.add({
+    severity: severity,
+    summary: summary,
+    detail: detail,
+    life: 10000,
+  });
+};
+
 const handleCreateAndAnother = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
+
   const obj = {
     name: name.value,
     category: category.value,
@@ -319,30 +341,37 @@ const handleCreateAndAnother = async () => {
     staffsCount: staffsCount.value,
     staffsId: staffNames.value,
   };
-  if (!validateForm()) {
-    try {
-      await axios.post(`${api}/tasks`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+  try {
+    await axios.post(`${api}/tasks`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
-      name.value = "";
-      category.value = "";
-      location.value = "";
-      status.value = "";
-      eta.value = "";
-      remark.value = "";
-      staffsCount.value = 1;
-      staffNames.value = "";
-    } catch (error) {
-      console.log(error.message);
-    }
+    showToast("success", "Form submitted", "Task successfully created");
+
+    name.value = "";
+    category.value = "";
+    location.value = "";
+    status.value = "";
+    eta.value = "";
+    remark.value = "";
+    staffsCount.value = 1;
+    staffNames.value = "";
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 
 const handleCreate = async () => {
+  if (validateForm())
+    return showToast(
+      "error",
+      "Failed to submit",
+      "Please fill out the required fields"
+    );
+
   const obj = {
     name: name.value,
     category: category.value,
@@ -353,17 +382,17 @@ const handleCreate = async () => {
     staffsCount: staffsCount.value,
     staffsId: staffNames.value,
   };
-  if (!validateForm(name, category, location, eta, staffsCount, date)) {
-    try {
-      await axios.post(`${api}/tasks`, JSON.stringify(obj), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+  try {
+    await axios.post(`${api}/tasks`, JSON.stringify(obj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    showToast("success", "Form submitted", "Task successfully created");
+    router.push("/dashboard/tasks");
+  } catch (error) {
+    showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
 };
 </script>

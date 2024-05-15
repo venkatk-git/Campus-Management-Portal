@@ -15,7 +15,7 @@ exports.getAllFaculty = catchAsync(async (req, res) => {
 
 exports.getFaculty = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const faculty = await Faculty.find({ id });
+  const faculty = await Faculty.findOne({ id });
 
   if (!faculty || faculty.length == 0) {
     return next(new AppError("No faculty found with that id", 404));

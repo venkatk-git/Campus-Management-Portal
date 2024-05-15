@@ -3,9 +3,9 @@
     <SideBar
       v-if="route.path != '/' && route.path != '/login' && route.path != '/404'"
     />
-    <div class="flex flex-col items-center w-full">
+    <div class="flex flex-col items-center min-w-[85%] max-w-[100%]">
       <Navbar
-        v-if="  
+        v-if="
           route.path != '/' && route.path != '/login' && route.path != '/404'
         "
       />
@@ -13,8 +13,10 @@
         :model="pages"
         class="self-start border-none px-[3.5rem] mb-4"
       /> -->
-      <div class="flex flex-auto justify-center items-center w-11/12">
-        <router-view />
+      <div
+        class="flex flex-auto justify-center items-center min-w-[60%]: max-w-[85%]"
+      >
+        <router-view class="w-[85rem]" />
       </div>
     </div>
   </div>
