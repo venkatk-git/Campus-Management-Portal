@@ -16,3 +16,26 @@ a {
     justify-content: flex-start;
   }
 }
+
+@media (max-width: 900px) {
+  .fields-contianer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .sm-fields {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .form-submition-buttons {
+    flex-direction: column;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}

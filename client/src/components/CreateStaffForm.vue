@@ -5,17 +5,17 @@
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
-        <div class="py-5 flex w-full">
-          <span class="px-10 w-1/5 pt-3"
+        <div class="py-5 flex w-full fields-contianer">
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Name<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputText
               v-model="name"
               :invalid="validationErrors.name.value"
               type="text"
               placeholder="Name"
-              class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
+              class="bg-[#1c2738] border-[#ffffff4e] max-[400px]:w-full"
             />
             <small v-if="validationErrors.name.value" class="text-red-500"
               >A staff must have a name</small
@@ -23,21 +23,22 @@
           </div>
         </div>
         <!-- Age -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Age<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputNumber
               v-model="age"
               :invalid="validationErrors.age.value"
               :pt:root:class="'flex'"
               inputId="minmax-buttons"
               mode="decimal"
-              showButtons
               :min="18"
               :max="100"
-              class="w-[15rem]"
+              class="w-[15rem] max-[400px]:w-full"
             />
             <small v-if="validationErrors.age.value" class="text-red-500"
               >A staff must have a age</small
@@ -45,17 +46,19 @@
           </div>
         </div>
         <!-- Gender -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Gender<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="gender"
               :invalid="validationErrors.gender.value"
               :options="genders"
               placeholder="Select Gender"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -71,17 +74,19 @@
           </div>
         </div>
         <!-- Category -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Category<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="category"
               :invalid="validationErrors.category.value"
               :options="categorys"
               placeholder="Select Category"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -97,14 +102,16 @@
           </div>
         </div>
         <!-- Location -->
-        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5">Location</span>
-          <div class="flex flex-col gap-3">
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 max-[900px]:w-full">Location</span>
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="location"
               :options="locations"
               placeholder="Select Location  "
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -117,18 +124,20 @@
           </div>
         </div>
         <!-- Contact -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Contact Number<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputMask
               id="phone"
               v-model="contact"
               :invalid="validationErrors.contact.value"
               mask="9999999999"
               placeholder="Phone number"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
             />
             <small v-if="validationErrors.contact.value" class="text-red-500"
               >A staff must have a contact number</small
@@ -138,23 +147,25 @@
       </div>
     </form>
     <!-- Buttons -->
-    <div class="flex w-full justify-end">
-      <div class="flex items-center my-7 gap-4">
+    <div class="flex w-full justify-end max-[500px]:justify-center">
+      <div
+        class="flex items-center my-7 gap-4 form-submition-buttons max-[500px]:w-full"
+      >
         <div>
           <span>Clear</span>
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
-            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
+            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5] submit-btn'"
             @click="handleCreateAndAnother()"
             >Create & Add Another</Button
           >
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
-            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
+            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5] submit-btn'"
             @click="handleCreate()"
             >Create Staff</Button
           >

@@ -4,17 +4,18 @@
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
-        <div class="py-5 flex w-full">
-          <span class="px-10 w-1/5 pt-3"
+        <div class="py-5 flex w-full fields-contianer">
+          <span class="px-10 pt-3 w-1/4 max-[900px]:w-full"
             >Name<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputText
               v-model="name"
               :invalid="validationErrors.name.value"
               type="text"
+              @change="() => (validationErrors.name.value = false)"
               placeholder="Name"
-              class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
+              class="bg-[#1c2738] border-[#ffffff4e] min-[900px]:w-[32rem]"
             />
             <small v-if="validationErrors.name.value" class="text-red-500"
               >A supervisor must have a name</small
@@ -22,39 +23,44 @@
           </div>
         </div>
         <!-- Age -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Age<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputNumber
               v-model="age"
-              :pt:root:class="'flex'"
               :invalid="validationErrors.age.value"
+              :pt:root:class="'flex'"
+              @change="() => (validationErrors.age.value = false)"
               inputId="minmax-buttons"
               mode="decimal"
-              showButtons
               :min="18"
-              :max="100"
-              class="w-[15rem]"
+              :max="80"
+              class="w-[12rem] max-[400px]:w-full"
             />
+            <small v-if="validationErrors.age.value" class="text-red-500"
+              >A supervisor must have a age</small
+            >
           </div>
-          <small v-if="validationErrors.age.value" class="text-red-500"
-            >A supervisor must have a age</small
-          >
         </div>
         <!-- Gender -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Gender<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="gender"
-              :options="genders"
               :invalid="validationErrors.gender.value"
+              :options="genders"
+              @change="() => (validationErrors.gender.value = false)"
               placeholder="Select Gender"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[12rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -65,22 +71,25 @@
               </template>
             </Dropdown>
             <small v-if="validationErrors.gender.value" class="text-red-500"
-              >A supervisor must have a age</small
+              >A supervisor must have a gender</small
             >
           </div>
         </div>
         <!-- Category -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Category<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="category"
-              :options="categorys"
               :invalid="validationErrors.category.value"
+              @change="() => (validationErrors.category.value = false)"
+              :options="categorys"
               placeholder="Select Category"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -90,50 +99,57 @@
                 </div>
               </template>
             </Dropdown>
+
             <small v-if="validationErrors.category.value" class="text-red-500"
               >A supervisor must have a category</small
             >
           </div>
         </div>
         <!-- Contact -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Contact Number<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputMask
               id="phone"
               v-model="contact"
               :invalid="validationErrors.contact.value"
+              @change="() => (validationErrors.contact.value = false)"
               mask="9999999999"
               placeholder="Phone number"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[12rem] max-[400px]:w-full"
             />
             <small v-if="validationErrors.contact.value" class="text-red-500"
-              >A supervisor must have a contact</small
+              >A supervisor must have a contact number</small
             >
           </div>
         </div>
       </div>
     </form>
-    <div class="flex w-full justify-end">
-      <div class="flex items-center my-7 gap-4">
+    <!-- Buttons -->
+    <div class="flex w-full justify-end max-[500px]:justify-center w">
+      <div
+        class="flex items-center my-7 gap-4 form-submition-buttons max-[500px]:w-full"
+      >
         <div>
           <span>Clear</span>
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
-            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
             @click="handleCreateAndAnother()"
+            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5] submit-btn"
             >Create & Add Another</Button
           >
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
-            :pt:root:class="'p-ripple px-4 py-2 rounded-lg  border-[#9ca3af] bg-[#4F46E5]'"
             @click="handleCreate()"
+            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5] submit-btn"
             >Create Supervisor</Button
           >
         </div>

@@ -1,22 +1,22 @@
 <template>
-  <div class="form-card">
+  <div class="form-card w-full">
     <Toast />
 
     <form action="">
       <div class="bg-[rgba(30,41,59,1)] w-full rounded-xl">
         <!-- Name -->
-        <div class="py-5 flex w-full">
-          <span class="px-10 w-1/5 pt-3"
+        <div class="py-5 flex w-full fields-contianer">
+          <span class="px-10 pt-3 w-1/4 max-[900px]:w-full"
             >Name<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputText
               v-model="name"
               :invalid="validationErrors.name.value"
               type="text"
               @change="() => (validationErrors.name.value = false)"
               placeholder="Name"
-              class="bg-[#1c2738] border-[#ffffff4e] w-[32rem]"
+              class="bg-[#1c2738] border-[#ffffff4e] min-[900px]:w-[32rem]"
             />
             <small v-if="validationErrors.name.value" class="text-red-500"
               >A task must have a name</small
@@ -24,15 +24,17 @@
           </div>
         </div>
         <!-- Calender -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >Date<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Calendar
               v-model="date"
-              :pt:input:class="'bg-[#1c2738] border-[1.5px] p-3 rounded-md border-[#ffffff4e] focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-500/50 dark:focus:ring-primary-400/50 focus:z-10 appearance-none transition-colors duration-200'"
-              :pt:panel:class="'bg-[#1c2738] border-[1.5px] p-3 rounded-md border-[#ffffff4e]'"
+              :pt:input:class="'bg-[#1c2738] border-[1.5px] p-3 rounded-md border-[#ffffff4e] focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-500/50 dark:focus:ring-primary-400/50 focus:z-10 appearance-none transition-colors duration-200 max-[400px]:w-full'"
+              :pt:panel:class="'bg-[#1c2738] border-[1.5px] p-3 rounded-md border-[#ffffff4e] '"
               dateFormat="dd/mm/yy"
             />
             <!-- <small v-if="!validationErrors.date.value" class="opacity-[60%]"
@@ -44,13 +46,13 @@
           </div>
         </div>
         <!-- Number of Staffs -->
-        <div class="flex flex-col py-5 w-full border-t-2 border-[#2e3b4e]">
-          <div class="flex">
-            <span class="px-10 w-1/5 pt-3"
+        <div class="flex flex-col py-5 border-t-2 border-[#2e3b4e]">
+          <div class="flex fields-contianer">
+            <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
               >Number of Staffs<span class="text-red-500"> *</span></span
             >
-            <div class="flex flex-col gap-3">
-              <form @submit.prevent="createNameField" class="flex gap-16">
+            <div class="flex flex-col gap-3 max-[900px]:px-10">
+              <form @submit.prevent="createNameField" class="flex">
                 <InputNumber
                   v-model="staffsCount"
                   :invalid="validationErrors.staffsCount.value"
@@ -58,15 +60,14 @@
                   :pt:root:class="'flex'"
                   inputId="minmax-buttons"
                   mode="decimal"
-                  showButtons
                   :min="1"
                   :max="20"
-                  class="w-[15rem]"
+                  class="w-[15rem] max-[400px]:w-full"
                 />
-                <Button
+                <!-- <Button
                   class="p-ripple px-4 py-2 rounded-lg border-none bg-[#4F46E5]"
                   >Enter Staffs</Button
-                >
+                > -->
               </form>
               <small
                 v-if="validationErrors.staffsCount.value"
@@ -75,38 +76,42 @@
               </small>
             </div>
           </div>
-          <div class="ml-10 grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+          <div class="flex flex-col">
             <div
-              class="flex flex-col gap-3 mt-6"
+              class="flex mt-6 fields-contianer"
               v-for="index in staffsCount"
               :key="index"
             >
-              <span for="username"
+              <span for="username" class="px-10 w-1/4 pt-3 max-[900px]:w-full"
                 >Staff Name {{ index
                 }}<span class="text-red-500"> *</span></span
               >
-              <InputText
-                v-model="staffNames[index - 1]"
-                type="text"
-                placeholder="Name"
-                class="bg-[#1c2738] border-[#ffffff4e] w-[20rem]"
-              />
+              <div class="max-[900px]:px-10 max-[900px]:w-full">
+                <InputText
+                  v-model="staffNames[index - 1]"
+                  type="text"
+                  placeholder="Name"
+                  class="bg-[#1c2738] border-[#ffffff4e] w-full min-[900px]:w-[32rem]"
+                />
+              </div>
             </div>
           </div>
         </div>
         <!-- Category -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Category<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="category"
               :invalid="validationErrors.category.value"
               @change="() => (validationErrors.category.value = false)"
               :options="categorys"
               placeholder="Select Category"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -123,18 +128,20 @@
           </div>
         </div>
         <!-- Location -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-2"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-2 max-[900px]:w-full"
             >Location<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <Dropdown
               v-model="location"
               :invalid="validationErrors.location.value"
               @change="() => (validationErrors.location.value = false)"
               :options="locations"
               placeholder="Select Location"
-              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
               style="min-width: 12rem"
               :showClear="true"
             >
@@ -150,23 +157,24 @@
           </div>
         </div>
         <!-- ETA -->
-        <div class="py-5 flex w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5 pt-3"
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4 pt-3 max-[900px]:w-full"
             >ETA<span class="text-red-500"> *</span></span
           >
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
             <InputNumber
               v-model="eta"
               :invalid="validationErrors.eta.value"
               @change="() => (validationErrors.eta.value = false)"
               :pt:root:class="'flex'"
               inputId="minmax-buttons"
-              placeholder="Estimated time in hours"
+              placeholder="Time"
               mode="decimal"
-              showButtons
               :min="0"
               :max="100"
-              class="w-[15rem]"
+              class="w-[12rem] max-[400px]:w-full"
             />
             <small v-if="validationErrors.eta.value" class="text-red-500"
               >A task must have a estimated time to finish</small
@@ -174,53 +182,62 @@
           </div>
         </div>
         <!-- Status -->
-        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5">Status</span>
-          <Dropdown
-            v-model="status"
-            :options="statuses"
-            placeholder="Select Status"
-            class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem]"
-            style="min-width: 12rem"
-            :showClear="true"
-          >
-            <template #option="slotProps">
-              <div class="flex items-center gap-2">
-                <span>{{ slotProps.option }}</span>
-              </div>
-            </template>
-          </Dropdown>
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4">Status</span>
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
+            <Dropdown
+              v-model="status"
+              :options="statuses"
+              placeholder="Select Status"
+              class="p-column-filter bg-[rgb(28,39,56)] border-[#ffffff4e] w-[15rem] max-[400px]:w-full"
+              style="min-width: 12rem"
+              :showClear="true"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center gap-2">
+                  <span>{{ slotProps.option }}</span>
+                </div>
+              </template>
+            </Dropdown>
+          </div>
         </div>
         <!-- Remarks -->
-        <div class="py-5 flex items-center w-full border-t-2 border-[#2e3b4e]">
-          <span class="px-10 w-1/5">Remarks</span>
-          <Textarea
-            v-model="remark"
-            rows="5"
-            cols="60"
-            class="border-[#ffffff4e]"
-          />
+        <div
+          class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
+        >
+          <span class="px-10 w-1/4">Remarks</span>
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
+            <Textarea
+              v-model="remark"
+              rows="5"
+              class="border-[#ffffff4e] min-[900px]:w-[32rem]"
+            />
+          </div>
         </div>
       </div>
     </form>
-    <div class="flex w-full justify-end">
-      <div class="flex items-center my-7 gap-4">
+    <div class="flex w-full justify-end max-[500px]:justify-center w">
+      <div
+        class="flex items-center my-7 gap-4 form-submition-buttons max-[500px]:w-full"
+      >
         <div>
           <span>Clear</span>
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
             @click="handleCreateAndAnother()"
-            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5]"
+            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5] submit-btn"
             >Create & Add Another</Button
           >
         </div>
-        <div>
+        <div class="max-[500px]:w-full">
           <Button
             v-ripple
             @click="handleCreate()"
-            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5]"
+            class="p-ripple border-none px-4 py-2 rounded-lg border-[#9ca3af] bg-[#4F46E5] submit-btn"
             >Create Staff</Button
           >
         </div>

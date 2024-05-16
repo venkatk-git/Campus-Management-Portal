@@ -346,7 +346,7 @@ const showToast = (severity, summary, detail) => {
 };
 
 let updateTaskId;
-let updateTaskName = "Update Information";
+let updateTaskName = "Update Inwmation";
 const updateStatus = ref("Ongoing");
 const updateRemarks = ref("");
 
