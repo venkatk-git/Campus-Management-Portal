@@ -13,7 +13,7 @@ const globalErrorHandler = require("./controllers/errors.controller.js");
 
 app.use(express.json());
 
-const corsOptions = {
+const corsOptions = { 
   credentials: true,
   origin: ["http://localhost:3000", "http://localhost:5173"],
 };

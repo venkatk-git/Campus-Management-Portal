@@ -26,7 +26,7 @@
               style="background-color: #2196f3; color: #ffffff; cursor: pointer"
               shape="circle"
             />
-            <span>User</span>
+            <span>{{ name }}</span>
           </div>
         </template>
       </Dropdown>
@@ -37,6 +37,8 @@
 <script setup>
 import router from "@/router";
 import { ref } from "vue";
+
+const name = ref(localStorage.getItem("name"));
 
 function ToggleMenu() {
   document.getElementById("aside").classList.toggle("open");

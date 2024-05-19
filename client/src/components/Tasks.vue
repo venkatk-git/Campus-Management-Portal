@@ -281,7 +281,11 @@
           </template>
         </Column>
         <!-- Edit -->
-        <Column header="Update" style="min-width: 6rem">
+        <Column
+          header="Update"
+          style="min-width: 6rem"
+          v-if="userType == 'admin' || userType == 'supervisor'"
+        >
           <template #body="{ data }">
             <Button
               @click="handleEdit(data.id, data.name)"

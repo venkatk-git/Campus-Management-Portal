@@ -39,7 +39,9 @@ async function validateAuth(params) {
   if (res.status == 200) {
     localStorage.setItem("token", res.data.data.token);
     localStorage.setItem("auth", true);
-    localStorage.setItem("user", res.data.data.user);
+    localStorage.setItem("role", res.data.data.user.role);
+    localStorage.setItem("email", res.data.data.user.email);
+    localStorage.setItem("name", res.data.data.user.name);
     router.push("/dashboard/analytics");
   }
 }

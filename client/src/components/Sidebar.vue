@@ -59,31 +59,37 @@
           </router-link>
         </div>
 
-        <h3 class="text-[#818cf8] text-sm font-semibold p-5 uppercase">
-          ADMIN
-        </h3>
-        <div class="menu flex flex-col gap-1">
-          <router-link class="button" to="/dashboard/createtask">
-            <span class="material-icons">design_services</span>
-            <span class="text">Create Task</span>
-          </router-link>
+        <div v-if="userType == 'admin' || userType == 'supervisor'">
+          <h3 class="text-[#818cf8] text-sm font-semibold p-5 uppercase">
+            ADMIN
+          </h3>
+          <div class="menu flex flex-col gap-1">
+            <router-link class="button" to="/dashboard/createtask">
+              <span class="material-icons">design_services</span>
+              <span class="text">Create Task</span>
+            </router-link>
 
-          <router-link class="button" to="/dashboard/createstaff">
-            <span class="material-icons">person_add</span>
-            <span class="text">Create Staff</span>
-          </router-link>
+            <router-link class="button" to="/dashboard/createstaff">
+              <span class="material-icons">person_add</span>
+              <span class="text">Create Staff</span>
+            </router-link>
 
-          <router-link class="button" to="/dashboard/createfaculty">
-            <span class="material-icons">group_add</span>
-            <span class="text">Create Faculty</span>
-          </router-link>
+            <router-link class="button" to="/dashboard/createfaculty">
+              <span class="material-icons">group_add</span>
+              <span class="text">Create Faculty</span>
+            </router-link>
 
-          <router-link class="button" to="/dashboard/createsupervisor">
-            <span class="material-symbols-outlined">
-              deployed_code_account
-            </span>
-            <span class="text">Create Supervisor</span>
-          </router-link>
+            <router-link
+              class="button"
+              to="/dashboard/createsupervisor"
+              v-if="userType == 'admin'"
+            >
+              <span class="material-symbols-outlined">
+                deployed_code_account
+              </span>
+              <span class="text">Create Supervisor</span>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -100,11 +106,18 @@
 import { ref } from "vue";
 import Logo from "./Logo.vue";
 
+let userType = ref(localStorage.getItem("role"));
+
 function ToggleMenu() {
   document.getElementById("aside").classList.toggle("open");
 }
 
 const isOpen = ref(localStorage.getItem("isOpen"));
+
+const setUserType = async () => {
+  userType = localStorage.getItem("role");
+};
+setUserType();
 </script>
 
 <style scoped>

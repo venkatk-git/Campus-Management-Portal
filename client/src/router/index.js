@@ -25,54 +25,58 @@ const router = createRouter({
       redirect: "/",
     },
     {
-      path: "/dashboard",
-      name: "dashboard",
-      component: Main,
-    },
-    {
       path: "/dashboard/analytics",
       name: "analytics",
       component: AnalyticsPage,
-    },
-    {
-      path: "/dashboard/createstaff",
-      name: "createstaff",
-      component: CreateStaffPage,
-    },
-    {
-      path: "/dashboard/createtask",
-      name: "createtask",
-      component: CreateTaskPage,
+      meta: { allow: "any" },
     },
     {
       path: "/dashboard/staffs",
       name: "staffs",
       component: StaffsPage,
+      meta: { allow: "any" },
     },
     {
       path: "/dashboard/tasks",
       name: "tasks",
       component: TasksPage,
+      meta: { allow: "any" },
     },
     {
       path: "/dashboard/faculty",
       name: "faculty",
       component: FacultyPage,
+      meta: { allow: "any" },
     },
     {
       path: "/dashboard/supervisors",
       name: "supervisors",
       component: SupervisorsPage,
+      meta: { allow: "any" },
+    },
+    {
+      path: "/dashboard/createstaff",
+      name: "createstaff",
+      component: CreateStaffPage,
+      meta: { allow: "protected" },
+    },
+    {
+      path: "/dashboard/createtask",
+      name: "createtask",
+      component: CreateTaskPage,
+      meta: { allow: "protected" },
     },
     {
       path: "/dashboard/createfaculty",
       name: "create faculty",
       component: CreateFacultyPage,
+      meta: { allow: "admin" },
     },
     {
       path: "/dashboard/createsupervisor",
       name: "create supervisor",
       component: CreateSupervisorPage,
+      meta: { allow: "admin" },
     },
     {
       path: "/404",
@@ -88,11 +92,24 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.path == "/") next();
+
   if (localStorage.getItem("auth") == "true") {
-    next();
-  } else {
-    next("/login");
+    if (to.meta.allow == "any") next();
+
+    if (
+      (to.meta.allow == "protected" &&
+        localStorage.getItem("role") == "admin") ||
+      localStorage.getItem("role") == "supervisor"
+    )
+      next();
+
+    if (to.meta.allow == "admin" && localStorage.getItem("role") == "admin")
+      next();
+
+    if (!to.meta.allow) next();
   }
+
+  next("/login");
 });
 
 export default router;
