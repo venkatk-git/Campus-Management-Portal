@@ -329,6 +329,7 @@ const locations = ref(["Block A", "Block B", "Block C"]);
 const loading = ref(true);
 
 let fetchedData;
+let userType;
 
 onMounted(async () => {
   fetchedData = await axios.get(`${api}/tasks`, {
@@ -336,6 +337,7 @@ onMounted(async () => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+  userType = localStorage.getItem("role");
   tasks.value = fetchedData.data.data.tasks;
   loading.value = false;
 });
