@@ -21,9 +21,9 @@
         <template #value>
           <div class="flex gap-1 items-center">
             <Avatar
-              label="V"
+              :label="name[0]"
               class="mr-2"
-              style="background-color: #2196f3; color: #ffffff; cursor: pointer"
+              style="background-color: #4f46e5; color: #ffffff; cursor: pointer"
               shape="circle"
             />
             <span>{{ name }}</span>

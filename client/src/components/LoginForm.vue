@@ -68,6 +68,12 @@ async function validateAuth() {
       }
     );
 
+    if (res.status == 401) {
+      validationErrors.email.value = true;
+      validationErrors.password.value = true;
+      return;
+    }
+
     if (res.status == 200) {
       localStorage.setItem("token", res.data.data.token);
       localStorage.setItem("auth", true);

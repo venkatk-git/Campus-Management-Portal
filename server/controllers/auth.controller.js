@@ -40,15 +40,15 @@ exports.login = catchAsync(async (req, res) => {
   const user = await User.findOne({ email }).select("+password");
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    res.status(401).json({
+    return res.status(401).json({
       status: "failed",
       message: "Invalid email or password",
     });
   }
 
-  const token = await signToken(user.email);
+  const token = signToken(user.email);
 
-  res.status(200).json({
+  return res.status(200).json({
     status: "success",
     data: {
       user,

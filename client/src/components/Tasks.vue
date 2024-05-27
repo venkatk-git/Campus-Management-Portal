@@ -353,8 +353,8 @@ const showToast = (severity, summary, detail) => {
 
 let updateTaskId;
 let updateTaskName = "Update Inwmation";
-const updateStatus = ref("Ongoing");
-const updateRemarks = ref("");
+const updateStatus = ref("");
+const updateRemarks = ref();
 
 const handleEdit = async (id, name) => {
   visible.value = true;
@@ -364,10 +364,32 @@ const handleEdit = async (id, name) => {
 
 const handleUpdateSave = async () => {
   visible.value = false;
-  const obj = {
-    status: updateStatus.value,
-    remarks: updateRemarks.value,
-  };
+
+  let obj;
+
+  if (updateRemarks.value === undefined && updateStatus.value === "") {
+    showToast(
+      "error",
+      "Failed to update",
+      "Please fill any one of the field to update"
+    );
+    return;
+  }
+
+  if (updateRemarks.value === undefined) {
+    obj = {
+      status: updateStatus.value,
+    };
+  } else if (updateStatus.value === "") {
+    obj = {
+      remarks: updateRemarks.value,
+    };
+  } else {
+    obj = {
+      status: updateStatus.value,
+      remarks: updateRemarks.value,
+    };
+  }
 
   try {
     await axios.patch(`${api}/tasks/${updateTaskId}`, obj, {
@@ -382,6 +404,8 @@ const handleUpdateSave = async () => {
       },
     });
     tasks.value = fetchedData.data.data.tasks;
+    updateStatus.value = "";
+    updateRemarks.value = undefined;
   } catch (error) {
     showToast("error", "Failed to submit", "Oops! Something went wrong");
   }

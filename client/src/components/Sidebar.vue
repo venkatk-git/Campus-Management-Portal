@@ -1,6 +1,7 @@
 <template>
   <aside
     class="flex flex-col bg-[#0f172a] overflow-hidden min-h-screen gap-5 p-4"
+    :class="open"
     id="aside"
   >
     <div
@@ -19,7 +20,7 @@
         </div>
         <div>
           <span
-            class="material-symbols-rounded font-bold lg:hidden"
+            class="material-symbols-rounded font-bold min-[900px]:hidden hover:cursor-pointer "
             @click="ToggleMenu()"
           >
             close
@@ -103,7 +104,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Logo from "./Logo.vue";
 
 let userType = ref(localStorage.getItem("role"));
@@ -111,6 +112,12 @@ let userType = ref(localStorage.getItem("role"));
 function ToggleMenu() {
   document.getElementById("aside").classList.toggle("open");
 }
+
+const open = ref("");
+
+onMounted(() => {
+  open.value = window.innerWidth > 950 ? "open" : "";
+});
 
 const isOpen = ref(localStorage.getItem("isOpen"));
 
