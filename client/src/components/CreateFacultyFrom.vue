@@ -22,6 +22,27 @@
             >
           </div>
         </div>
+        <!-- Email -->
+        <div
+          class="py-5 flex w-full fields-contianer border-t-2 border-[#2e3b4e]"
+        >
+          <span class="px-10 pt-3 w-1/4 max-[900px]:w-full"
+            >Email<span class="text-red-500"> *</span></span
+          >
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
+            <InputText
+              v-model="email"
+              :invalid="validationErrors.email.value"
+              type="text"
+              @change="() => (validationErrors.email.value = false)"
+              placeholder="example@bitsathy.ac.in"
+              class="bg-[#1c2738] border-[#ffffff4e] min-[900px]:w-[32rem]"
+            />
+            <small v-if="validationErrors.email.value" class="text-red-500"
+              >A faculty must have a email</small
+            >
+          </div>
+        </div>
         <!-- Age -->
         <div
           class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
@@ -155,6 +176,7 @@ import facultyFormValidate from "./functions/facultyFormValidation";
 const toast = useToast();
 
 const name = ref();
+const email = ref();
 const age = ref(18);
 const gender = ref();
 const details = ref();
@@ -163,6 +185,7 @@ const genders = ref(["Male", "Female"]);
 
 const validationErrors = {
   name: ref(false),
+  email: ref(false),
   age: ref(false),
   gender: ref(false),
   details: ref(false),
@@ -170,7 +193,14 @@ const validationErrors = {
 };
 
 const validateForm = () => {
-  const errorNote = facultyFormValidate(name, age, gender, details, contact);
+  const errorNote = facultyFormValidate(
+    name,
+    age,
+    gender,
+    details,
+    contact,
+    email
+  );
   let flag = 0;
   for (let i = 0; i < errorNote.length; i++) {
     if (errorNote[i] == "name") validationErrors.name.value = true;
@@ -178,13 +208,15 @@ const validateForm = () => {
     if (errorNote[i] == "gender") validationErrors.gender.value = true;
     if (errorNote[i] == "details") validationErrors.details.value = true;
     if (errorNote[i] == "contact") validationErrors.contact.value = true;
+    if (errorNote[i] == "email") validationErrors.email.value = true;
 
     if (
       errorNote[i] == "name" ||
       errorNote[i] == "age" ||
       errorNote[i] == "gender" ||
       errorNote[i] == "details" ||
-      errorNote[i] == "contact"
+      errorNote[i] == "contact" ||
+      errorNote[i] == "email"
     )
       flag = 1;
   }
@@ -207,7 +239,7 @@ const handleCreateAndAnother = async () => {
       "Failed to submit",
       "Please fill out the required fields"
     );
-  const obj = {
+  const valueObj = {
     name: name.value,
     age: age.value,
     gender: gender.value,
@@ -215,20 +247,34 @@ const handleCreateAndAnother = async () => {
     contact: contact.value,
   };
 
+  const credentialObj = {
+    name: name.value,
+    email: email.value,
+    password: email.value,
+    role: "faculty",
+  };
+
   try {
-    await axios.post(`${api}/faculty`, JSON.stringify(obj), {
+    await axios.post(`${api}/faculty`, JSON.stringify(valueObj), {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    showToast("success", "Form submitted", "Faculty successfully created");
+
+    await axios.post(`${api}/users/signup`, JSON.stringify(credentialObj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     name.value = "";
     age.value = 18;
     gender.value = "";
     details.value = "";
     contact.value = undefined;
+    showToast("success", "Form submitted", "Faculty successfully created");
   } catch (error) {
     showToast("error", "Failed to submit", "Oops! Something went wrong");
   }
@@ -241,25 +287,43 @@ const handleCreate = async () => {
       "Failed to submit",
       "Please fill out the required fields"
     );
-  const obj = {
+  const valueObj = {
     name: name.value,
     age: age.value,
     gender: gender.value,
     details: details.value,
     contact: contact.value,
   };
+
+  const credentialObj = {
+    name: name.value,
+    email: email.value,
+    password: email.value.split("@")[0],
+    role: "faculty",
+  };
+
   try {
-    await axios.post(`${api}/faculty`, JSON.stringify(obj), {
+    await axios.post(`${api}/faculty`, JSON.stringify(valueObj), {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+
+    await axios.post(`${api}/users/signup`, JSON.stringify(credentialObj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
     name.value = "";
+    email.value = "";
     age.value = 18;
     gender.value = "";
     details.value = "";
     contact.value = undefined;
+
     showToast("success", "Form submitted", "Faculty successfully created");
 
     router.push("/dashboard/faculty");

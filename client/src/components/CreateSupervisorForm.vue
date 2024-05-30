@@ -22,6 +22,27 @@
             >
           </div>
         </div>
+        <!-- Email -->
+        <div
+          class="py-5 flex w-full fields-contianer border-t-2 border-[#2e3b4e]"
+        >
+          <span class="px-10 pt-3 w-1/4 max-[900px]:w-full"
+            >Email<span class="text-red-500"> *</span></span
+          >
+          <div class="flex flex-col gap-3 max-[900px]:px-10">
+            <InputText
+              v-model="email"
+              :invalid="validationErrors.email.value"
+              type="text"
+              @change="() => (validationErrors.email.value = false)"
+              placeholder="example@bitsathy.ac.in"
+              class="bg-[#1c2738] border-[#ffffff4e] min-[900px]:w-[32rem]"
+            />
+            <small v-if="validationErrors.email.value" class="text-red-500"
+              >A faculty must have a email</small
+            >
+          </div>
+        </div>
         <!-- Age -->
         <div
           class="py-5 flex w-full border-t-2 border-[#2e3b4e] fields-contianer"
@@ -169,6 +190,7 @@ import supervisorFormValidate from "./functions/supervisorFormValidation";
 const toast = useToast();
 
 const name = ref();
+const email = ref();
 const age = ref(18);
 const gender = ref();
 const category = ref();
@@ -185,6 +207,7 @@ const categorys = ref([
 
 const validationErrors = {
   name: ref(false),
+  email: ref(false),
   age: ref(false),
   gender: ref(false),
   category: ref(false),
@@ -194,6 +217,7 @@ const validationErrors = {
 const validateForm = () => {
   const errorNote = supervisorFormValidate(
     name,
+    email,
     age,
     gender,
     category,
@@ -205,14 +229,15 @@ const validateForm = () => {
     if (errorNote[i] == "age") validationErrors.age.value = true;
     if (errorNote[i] == "gender") validationErrors.gender.value = true;
     if (errorNote[i] == "category") validationErrors.category.value = true;
-    if (errorNote[i] == "contact") validationErrors.contact.value = true;
+    if (errorNote[i] == "email") validationErrors.email.value = true;
 
     if (
       errorNote[i] == "name" ||
       errorNote[i] == "age" ||
       errorNote[i] == "gender" ||
       errorNote[i] == "category" ||
-      errorNote[i] == "contact"
+      errorNote[i] == "contact" ||
+      errorNote[i] == "email"
     )
       flag = 1;
   }
@@ -236,7 +261,7 @@ const handleCreateAndAnother = async () => {
       "Please fill out the required fields"
     );
 
-  const obj = {
+  const valueObj = {
     name: name.value,
     age: age.value,
     gender: gender.value,
@@ -244,14 +269,30 @@ const handleCreateAndAnother = async () => {
     contact: contact.value,
   };
 
+  const credentialObj = {
+    name: name.value,
+    email: email.value,
+    password: email.value,
+    role: "supervisor",
+  };
+
   try {
-    await axios.post(`${api}/supervisors`, JSON.stringify(obj), {
+    await axios.post(`${api}/supervisors`, JSON.stringify(valueObj), {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+
+    await axios.post(`${api}/users/signup`, JSON.stringify(credentialObj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
     name.value = "";
+    email.value = "";
     age.value = 18;
     gender.value = "";
     category.value = "";
@@ -270,7 +311,7 @@ const handleCreate = async () => {
       "Please fill out the required fields"
     );
 
-  const obj = {
+  const valueObj = {
     name: name.value,
     age: age.value,
     gender: gender.value,
@@ -278,8 +319,22 @@ const handleCreate = async () => {
     contact: contact.value,
   };
 
+  const credentialObj = {
+    name: name.value,
+    email: email.value,
+    password: email.value,
+    role: "supervisor",
+  };
+
   try {
-    await axios.post(`${api}/supervisors`, JSON.stringify(obj), {
+    await axios.post(`${api}/supervisors`, JSON.stringify(valueObj), {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    await axios.post(`${api}/users/signup`, JSON.stringify(credentialObj), {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,

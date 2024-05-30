@@ -18,12 +18,10 @@ exports.signup = catchAsync(async (req, res) => {
     role: req.body.role,
   });
 
-  const token = signToken(newUser.email);
   res.status(201).json({
     status: "success",
     data: {
       user: newUser,
-      token,
     },
   });
 });

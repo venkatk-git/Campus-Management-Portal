@@ -20,7 +20,7 @@
         </div>
         <div>
           <span
-            class="material-symbols-rounded font-bold min-[900px]:hidden hover:cursor-pointer "
+            class="material-symbols-rounded font-bold min-[900px]:hidden hover:cursor-pointer"
             @click="ToggleMenu()"
           >
             close
@@ -62,7 +62,7 @@
 
         <div v-if="userType == 'admin' || userType == 'supervisor'">
           <h3 class="text-[#818cf8] text-sm font-semibold p-5 uppercase">
-            ADMIN
+            {{ userType.toUpperCase() }}
           </h3>
           <div class="menu flex flex-col gap-1">
             <router-link class="button" to="/dashboard/createtask">
@@ -75,7 +75,11 @@
               <span class="text">Create Staff</span>
             </router-link>
 
-            <router-link class="button" to="/dashboard/createfaculty">
+            <router-link
+              class="button"
+              to="/dashboard/createfaculty"
+              v-if="userType == 'admin'"
+            >
               <span class="material-icons">group_add</span>
               <span class="text">Create Faculty</span>
             </router-link>

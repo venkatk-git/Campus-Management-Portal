@@ -91,25 +91,35 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log(to.meta.allow);
   if (to.path == "/") next();
 
   if (localStorage.getItem("auth") == "true") {
-    if (to.meta.allow == "any") next();
+    if (to.meta.allow == "any") return next();
 
-    if (
-      (to.meta.allow == "protected" &&
-        localStorage.getItem("role") == "admin") ||
-      localStorage.getItem("role") == "supervisor"
-    )
-      next();
+    if (to.meta.allow == "admin") {
+      if (localStorage.getItem("role") == "admin") {
+        return next();
+      }
 
-    if (to.meta.allow == "admin" && localStorage.getItem("role") == "admin")
-      next();
+      return next("/");
+    }
 
-    if (!to.meta.allow) next();
+    if (to.meta.allow == "protected") {
+      if (
+        localStorage.getItem("role") == "admin" ||
+        localStorage.getItem("role") == "supervisor"
+      ) {
+        return next();
+      }
+
+      return next("/");
+    }
+
+    if (!to.meta.allow) return next();
+
+    return next("/login");
   }
-
-  next("/login");
 });
 
 export default router;
