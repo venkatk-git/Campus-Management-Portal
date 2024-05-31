@@ -8,6 +8,9 @@ router.post(
   authController.restrictTo("admin"),
   authController.signup
 );
+
 router.post("/login", authController.login);
+
+router.patch("/updatePassword", authController.updatePassword);
 
 module.exports = router;

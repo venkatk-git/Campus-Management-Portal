@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "@/views/Login.vue";
-import Main from "@/views/Main.vue";
+import UpdatePassword from "@/views/UpdatePassword.vue";
 import AnalyticsPage from "@/views/AnalyticsPage.vue";
 import CreateStaffPage from "@/views/CreateStaffPage.vue";
 import CreateTaskPage from "@/views/CreateTaskPage.vue";
@@ -23,6 +23,11 @@ const router = createRouter({
     {
       path: "/login",
       redirect: "/",
+    },
+    {
+      path: "/updatepassword",
+      name: "updatepassword",
+      component: UpdatePassword,
     },
     {
       path: "/dashboard/analytics",

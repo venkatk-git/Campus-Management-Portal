@@ -33,6 +33,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+//Updating the password
+userSchema.pre("updateOne", async function (next) {
+  if (!this._update.password) return next();
+
+  this._update.password = await bcrypt.hash(this._update.password, 12);
+  next();
+});
+
 // Comparing the password
 userSchema.methods.correctPassword = async function (
   candidatePassword,

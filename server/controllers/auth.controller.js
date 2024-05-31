@@ -55,6 +55,36 @@ exports.login = catchAsync(async (req, res) => {
   });
 });
 
+exports.updatePassword = catchAsync(async (req, res) => {
+  const { email, password, newPassword } = req.body;
+  if (!email || !password || !newPassword) {
+    res.status(400).json({
+      status: "failed",
+      message: "Provide email, password and a new password",
+    });
+  }
+
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({
+      status: "failed",
+      message: "Invalid email or password",
+    });
+  }
+
+  await User.updateOne({ email }, { password: newPassword });
+
+  const updatedUser = await User.findOne({ email }).select("+password");
+
+  return res.status(200).json({
+    status: "success",
+    data: {
+      updatedUser,
+    },
+  });
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
 

@@ -1,12 +1,20 @@
 <template>
   <div class="flex min-h-screen w-full">
     <SideBar
-      v-if="route.path != '/' && route.path != '/login' && route.path != '/404'"
+      v-if="
+        route.path != '/' &&
+        route.path != '/login' &&
+        route.path != '/404' &&
+        route.path != '/updatepassword'
+      "
     />
     <div class="flex flex-col items-center min-w-[85%] max-w-[100%] w-full">
       <Navbar
         v-if="
-          route.path != '/' && route.path != '/login' && route.path != '/404'
+          route.path != '/' &&
+          route.path != '/login' &&
+          route.path != '/404' &&
+          route.path != '/updatepassword'
         "
       />
       <div
