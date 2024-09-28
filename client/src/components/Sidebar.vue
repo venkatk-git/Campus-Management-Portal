@@ -128,6 +128,7 @@ const isOpen = ref(localStorage.getItem("isOpen"));
 const setUserType = async () => {
   userType = localStorage.getItem("role");
 };
+
 setUserType();
 </script>
 
